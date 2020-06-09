@@ -7,13 +7,119 @@
 #include "Tablero.h"
 
 using namespace std;
-void menu() {
+
+Tablero* tablero = new Tablero();
+ActivoRenta rentas;
+
+//Area general
+void logIn(string, string);
+/*__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--*/
+
+//Esto es para el area de administrador
+void registrarUsuario();
+void registrarInmueble();
+void reportesMatriz();
+void transaccion();
+/*__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--*/
+
+//Esto es para El usuario
+void agregarActivo(NodoTablero* );
+void eliminarActivo(NodoTablero* );
+void modificarActivo(NodoTablero* );
+void rentarActivo(NodoTablero* );
+void 
+
+
+/*__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--*/
+void menuAdministrador() {
     int opcion = 0;
     bool validador = true;
 
     while (validador) {
+        //
         cout << "----------------Bienvenido al sistema de rentas----------------" << endl;
-        cout << "" << endl;
+        cout << "-----------------------------Menu------------------------------" << endl;
+        cout << "1. Registrar usuario" << endl;
+        cout << "2. Reporte Matriz" << endl;
+        cout << "3. Reportes de un departamento" << endl;
+        cout << "4. Reportes de una empresa" << endl;
+        cout << "5. Reporte transacciones" << endl;
+        cout << "6. Activos de un usuario" << endl;
+        cout << "7. Activos rentados por un usuario" << endl;
+        cout << "8. Ordenar transacciones" << endl;
+
+        cout << "Ingrese una opcion" << endl;
+        cin >> opcion;
+
+        switch (opcion)
+        {
+        case 1:
+            registrarUsuario();
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        case 7:
+            break;
+        case 8:
+            break;
+        case 9:
+            validador = false;
+            break;
+        default:
+
+            break;
+        }
+    }
+
+}
+void registrarUsuario() {
+    //DatosEmpleado(string usernarme, string contraseña, string nombreCompleto, ActivoRenta rentas, string departamento, string empresa) {
+
+    string userName, contrasea, nombreCompleto, departamento, empresa;
+    system("cls");
+    cout << "Ingresar Nombre de usuario" << endl;
+    cin.getline((char*)userName.c_str(), 100, '\n');
+    cin.ignore();
+    cout << "Ingresar Contraseña" << endl;
+    cin.getline((char*)contrasea.c_str(), 100, '\n');
+    cin.ignore();
+    cout << "Ingresar Nombre completo" << endl;
+    cin.getline((char*)nombreCompleto.c_str(), 100, '\n');
+    cin.ignore();
+    cout << "Ingresar Departamento" << endl;
+    cin.getline((char*)departamento.c_str(), 100, '\n');
+    cin.ignore();
+    cout << "Ingresar Empresa" << endl;
+    cin.getline((char*)empresa.c_str(), 100, '\n');
+    cin.ignore();
+
+    tablero->insertarElemento(userName, contrasea, nombreCompleto, ActivoRenta(), departamento, empresa);
+}
+
+void menuUsuario(NodoTablero* usuario) {
+    int opcion = 0;
+    bool validador = true;
+
+    while (validador) {
+        system("cls");
+        cout << "--------------------------" << usuario->empleado->getNombre() << "--------------------------" << endl;
+        cout << "----------------------------------------------------------------------------" << endl << endl;
+
+        cout << "1. Agregar activo." << endl;
+        cout << "2. Elminacion de activo." << endl;
+        cout << "3. Modificar Activo." << endl;
+        cout << "4. Rentar Activo." << endl;
+        cout << "5. Activos Rentados" << endl;
+        cout << "6. Mis activos rentados" << endl;
+        cout << "7. Cerrar sesion" << endl;
+        cout << "Ingrese opcion: ";
+        cin >> opcion;
 
         switch (opcion)
         {
@@ -23,17 +129,22 @@ void menu() {
             break;
         case 3:
             break;
+        case 4:
+            break;
         case 5:
+            break;
+        case 6:
+            break;
+        case 7:
             break;
         default:
             break;
         }
     }
 
+
+    
 }
-
-
-
 
 int main()
 {

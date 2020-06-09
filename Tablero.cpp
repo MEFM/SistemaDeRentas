@@ -313,7 +313,7 @@ void Tablero::graficar() {
 		archivo << "A" << auxiliar << " [label = " << auxiliar->nombre << "   width = 1.5 style = filled, fillcolor = lightskyblue, group = " << contador << " ];" << endl;
 		auxiliar->grupo_graf = contador;
 		contador++;
-		
+
 		auxiliar = auxiliar->siguiente;
 	}
 
@@ -353,19 +353,39 @@ void Tablero::graficar() {
 
 	contador = 2;
 	while (auxiliar != 0) {
+
 		auxiliar2 = auxiliar->siguiente;
 		while (auxiliar2 != 0) {
 
-			archivo << "N"<< auxiliar<<"_L"<<auxiliar2<<" [label = \""<<auxiliar2->empleado->getUser()<<"\" width = 1.5, group = "<<auxiliar2->arriba->grupo_graf<<" ];" << endl;
+			archivo << "N" << auxiliar << "_L" << auxiliar2 << " [label = \"" << auxiliar2->empleado->getUser() << "\" width = 1.5, group = " << auxiliar2->arriba->grupo_graf << " ];" << endl;
 			auxiliar2->grupo_graf = auxiliar2->arriba->grupo_graf;
-			archivo << "A" << auxiliar << "->" << "N" << auxiliar << "_L" << auxiliar2 << endl;
-			archivo << "U" << auxiliar << "->" << "N" << auxiliar << "_L" << auxiliar2 << endl;
 			auxiliar2 = auxiliar2->siguiente;
 		}
+
 
 		auxiliar = auxiliar->abajo;
 	}
 
+
+	auxiliar = this->cabecera->abajo;
+	auxiliar2 = 0;
+
+	contador = 2;
+	while (auxiliar != 0) {
+
+		auxiliar2 = auxiliar->siguiente;
+		while (auxiliar2 != 0) {
+			//archivo << "A" << auxiliar << "->" << "N" << auxiliar << "_L" << auxiliar2 << endl;
+
+			archivo << "U" << auxiliar << "->" << "N" << auxiliar << "_L" << auxiliar2 << endl;
+			auxiliar2 = auxiliar2->siguiente;
+		}
+
+
+		auxiliar = auxiliar->abajo;
+	}
+
+	
 
 	archivo << "}" << endl;
 	archivo.close();
