@@ -1,0 +1,49 @@
+digraph a{
+node[shape=box];
+0140B708[ label = "Matrix", width = 1.5, style = filled, fillcolor = firebrick1, group = 1 ];
+U01413A38 [label = "max"    pos = "5.3, 3.5!" width = 1.5 style = filled, fillcolor = bisque1, group = 1 ];
+U01414618 [label = "Qla"    pos = "5.3, 3.5!" width = 1.5 style = filled, fillcolor = bisque1, group = 1 ];
+U014149F0 [label = "PFA"    pos = "5.3, 3.5!" width = 1.5 style = filled, fillcolor = bisque1, group = 1 ];
+U014155D0 [label = "UPS"    pos = "5.3, 3.5!" width = 1.5 style = filled, fillcolor = bisque1, group = 1 ];
+0140B708->U01413A38
+U01413A38-> U01414618
+U01414618-> U014149F0
+U01414618-> U01413A38
+U014149F0-> U014155D0
+U014149F0-> U01414618
+U014155D0-> U014149F0
+
+
+A014138F0 [label = Guate   width = 1.5 style = filled, fillcolor = lightskyblue, group = 2 ];
+A01413CC8 [label = Jalapa   width = 1.5 style = filled, fillcolor = lightskyblue, group = 3 ];
+A014148A8 [label = Jutipa   width = 1.5 style = filled, fillcolor = lightskyblue, group = 4 ];
+A01415488 [label = Solola   width = 1.5 style = filled, fillcolor = lightskyblue, group = 5 ];
+0140B708->A014138F0
+A014138F0-> A01413CC8
+A01413CC8-> A014148A8
+A01413CC8-> A014138F0
+A014148A8-> A01415488
+A014148A8-> A01413CC8
+A01415488-> A014148A8
+{rank = same;
+0140B708;
+A014138F0;
+A01413CC8;
+A014148A8;
+A01415488;
+}
+
+
+N01413A38_L0140C808 [label = "Mynor" width = 1.5, group = 2 ];
+A01413A38->N01413A38_L0140C808
+U01413A38->N01413A38_L0140C808
+N01414618_L01413B80 [label = "Diana" width = 1.5, group = 3 ];
+A01414618->N01414618_L01413B80
+U01414618->N01414618_L01413B80
+N014149F0_L01414760 [label = "Estuardo" width = 1.5, group = 4 ];
+A014149F0->N014149F0_L01414760
+U014149F0->N014149F0_L01414760
+N014155D0_L01414B38 [label = "Paola" width = 1.5, group = 5 ];
+A014155D0->N014155D0_L01414B38
+U014155D0->N014155D0_L01414B38
+}
