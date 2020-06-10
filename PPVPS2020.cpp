@@ -9,7 +9,12 @@
 using namespace std;
 
 Tablero* tablero = new Tablero();
-ActivoRenta rentas;
+AVL rentas;
+
+void Mostrar(int& d, int FE)
+{
+	cout << d << endl;
+}
 
 //Area general
 void logIn(string, string);
@@ -23,165 +28,175 @@ void transaccion();
 /*__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--*/
 
 //Esto es para El usuario
-void agregarActivo(NodoTablero* );
-void eliminarActivo(NodoTablero* );
-void modificarActivo(NodoTablero* );
-void rentarActivo(NodoTablero* );
-void 
+void agregarA(AVL);
+void eliminarActivo(AVL);
+void modificarActivo(AVL);
+void rentarActivo(AVL);
+
+
+
 
 
 /*__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--*/
 void menuAdministrador() {
-    int opcion = 0;
-    bool validador = true;
+	int opcion = 0;
+	bool validador = true;
 
-    while (validador) {
-        //
-        cout << "----------------Bienvenido al sistema de rentas----------------" << endl;
-        cout << "-----------------------------Menu------------------------------" << endl;
-        cout << "1. Registrar usuario" << endl;
-        cout << "2. Reporte Matriz" << endl;
-        cout << "3. Reportes de un departamento" << endl;
-        cout << "4. Reportes de una empresa" << endl;
-        cout << "5. Reporte transacciones" << endl;
-        cout << "6. Activos de un usuario" << endl;
-        cout << "7. Activos rentados por un usuario" << endl;
-        cout << "8. Ordenar transacciones" << endl;
+	while (validador) {
+		//
+		cout << "----------------Bienvenido al sistema de rentas----------------" << endl;
+		cout << "-----------------------------Menu------------------------------" << endl;
+		cout << "1. Registrar usuario" << endl;
+		cout << "2. Reporte Matriz" << endl;
+		cout << "3. Reportes de un departamento" << endl;
+		cout << "4. Reportes de una empresa" << endl;
+		cout << "5. Reporte transacciones" << endl;
+		cout << "6. Activos de un usuario" << endl;
+		cout << "7. Activos rentados por un usuario" << endl;
+		cout << "8. Ordenar transacciones" << endl;
 
-        cout << "Ingrese una opcion" << endl;
-        cin >> opcion;
+		cout << "Ingrese una opcion" << endl;
+		cin >> opcion;
 
-        switch (opcion)
-        {
-        case 1:
-            registrarUsuario();
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
-        case 5:
-            break;
-        case 6:
-            break;
-        case 7:
-            break;
-        case 8:
-            break;
-        case 9:
-            validador = false;
-            break;
-        default:
+		switch (opcion)
+		{
+		case 1:
+			registrarUsuario();
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 5:
+			break;
+		case 6:
+			break;
+		case 7:
+			break;
+		case 8:
+			break;
+		case 9:
+			validador = false;
+			break;
+		default:
 
-            break;
-        }
-    }
+			break;
+		}
+	}
 
 }
 void registrarUsuario() {
-    //DatosEmpleado(string usernarme, string contraseña, string nombreCompleto, ActivoRenta rentas, string departamento, string empresa) {
+	//DatosEmpleado(string usernarme, string contraseña, string nombreCompleto, ActivoRenta rentas, string departamento, string empresa) {
 
-    string userName, contrasea, nombreCompleto, departamento, empresa;
-    system("cls");
-    cout << "Ingresar Nombre de usuario" << endl;
-    cin.getline((char*)userName.c_str(), 100, '\n');
-    cin.ignore();
-    cout << "Ingresar Contraseña" << endl;
-    cin.getline((char*)contrasea.c_str(), 100, '\n');
-    cin.ignore();
-    cout << "Ingresar Nombre completo" << endl;
-    cin.getline((char*)nombreCompleto.c_str(), 100, '\n');
-    cin.ignore();
-    cout << "Ingresar Departamento" << endl;
-    cin.getline((char*)departamento.c_str(), 100, '\n');
-    cin.ignore();
-    cout << "Ingresar Empresa" << endl;
-    cin.getline((char*)empresa.c_str(), 100, '\n');
-    cin.ignore();
+	string userName, contrasea, nombreCompleto, departamento, empresa;
+	system("cls");
+	cout << "Ingresar Nombre de usuario" << endl;
+	cin.getline((char*)userName.c_str(), 100, '\n');
+	cin.ignore();
+	cout << "Ingresar Contraseña" << endl;
+	cin.getline((char*)contrasea.c_str(), 100, '\n');
+	cin.ignore();
+	cout << "Ingresar Nombre completo" << endl;
+	cin.getline((char*)nombreCompleto.c_str(), 100, '\n');
+	cin.ignore();
+	cout << "Ingresar Departamento" << endl;
+	cin.getline((char*)departamento.c_str(), 100, '\n');
+	cin.ignore();
+	cout << "Ingresar Empresa" << endl;
+	cin.getline((char*)empresa.c_str(), 100, '\n');
+	cin.ignore();
 
-    tablero->insertarElemento(userName, contrasea, nombreCompleto, ActivoRenta(), departamento, empresa);
+	tablero->insertarElemento(userName, contrasea, nombreCompleto, AVL(), departamento, empresa);
 }
 
 void menuUsuario(NodoTablero* usuario) {
-    int opcion = 0;
-    bool validador = true;
+	int opcion = 0;
+	bool validador = true;
 
-    while (validador) {
-        system("cls");
-        cout << "--------------------------" << usuario->empleado->getNombre() << "--------------------------" << endl;
-        cout << "----------------------------------------------------------------------------" << endl << endl;
+	while (validador) {
+		system("cls");
+		cout << "--------------------------" << usuario->empleado->getNombre() << "--------------------------" << endl;
+		cout << "----------------------------------------------------------------------------" << endl << endl;
 
-        cout << "1. Agregar activo." << endl;
-        cout << "2. Elminacion de activo." << endl;
-        cout << "3. Modificar Activo." << endl;
-        cout << "4. Rentar Activo." << endl;
-        cout << "5. Activos Rentados" << endl;
-        cout << "6. Mis activos rentados" << endl;
-        cout << "7. Cerrar sesion" << endl;
-        cout << "Ingrese opcion: ";
-        cin >> opcion;
+		cout << "1. Agregar activo." << endl;
+		cout << "2. Elminacion de activo." << endl;
+		cout << "3. Modificar Activo." << endl;
+		cout << "4. Rentar Activo." << endl;
+		cout << "5. Activos Rentados" << endl;
+		cout << "6. Mis activos rentados" << endl;
+		cout << "7. Cerrar sesion" << endl;
+		cout << "Ingrese opcion: ";
+		cin >> opcion;
 
-        switch (opcion)
-        {
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-        case 5:
-            break;
-        case 6:
-            break;
-        case 7:
-            break;
-        default:
-            break;
-        }
-    }
+		switch (opcion)
+		{
+		case 1:
+
+			break;
+		case 2:
+
+			break;
+		case 3:
+
+			break;
+		case 4:
+
+			break;
+		case 5:
+			//Hacer recorrido de activos rentados
+			break;
+		case 6:
+			//Hacer recorrido de mis activos rentados(por usuario)
+			break;
+		case 7:
+			//Salir a Log in
+			break;
+		default:
+			break;
+		}
+	}
 
 
-    
+
 }
 
 int main()
 {
-    string palabra1 = "allain";
-    string palabra2 = "allaan";
+	string palabra1 = "allain";
+	string palabra2 = "allaan";
 
-    if (palabra1 < palabra2) {
-        cout << "Correcto" << endl;
-    }
-    else {
-        cout << "Hm" << endl;
-    }
+	if (palabra1 < palabra2) {
+		cout << "Correcto" << endl;
+	}
+	else {
+		cout << "Hm" << endl;
+	}
 
-    ActivoRenta arbol;
+	AVL arbol;
 
-    arbol.insertar("", "", 10);
-    arbol.insertar("", "", 5);
-    arbol.insertar("", "", 13);
-    arbol.insertar("", "", 1);
-    arbol.insertar("", "", 6);
-    arbol.insertar("", "", 12);
-    arbol.insertar("", "", 11);
-    arbol.insertar("", "", 17);
-    arbol.insertar("", "", 15);
+	arbol.insertar("Hol", 10, "", true);
+	arbol.insertar("Mi", 5, "", false);
+	arbol.insertar("Op", 13, "", true);
+	arbol.insertar("Lp", 1, "", false);
+	arbol.insertar("Qw", 6, "", false);
+	arbol.insertar("Gf", 12, "", true);
+	arbol.insertar("bf", 11, "", false);
+	arbol.insertar("Mk", 17, "", true);
+	arbol.insertar("Ml", 15, "", true);
 
-    arbol.gPreorden();
+	//arbol.InOrden(Mostrar);
 
+	arbol.recor();
 
-    Tablero* tablero = new Tablero();
+	Tablero* tablero = new Tablero();
 
-    tablero->insertarElemento("Mynor", "Mynor", "fd", arbol, "Guate", "max");
-    tablero->insertarElemento("Diana", "asd", "fd", arbol, "Jalapa", "Qla");
-    tablero->insertarElemento("Estuardo", "asd", "fd", arbol, "Jutipa", "PFA");
-    tablero->insertarElemento("Paola", "asd", "fd", arbol, "Solola", "UPS");
+	tablero->insertarElemento("Mynor", "Mynor", "fd", arbol, "Guate", "max");
+	tablero->insertarElemento("Diana", "asd", "fd", arbol, "Jalapa", "Qla");
+	tablero->insertarElemento("Estuardo", "asd", "fd", arbol, "Jutipa", "PFA");
+	tablero->insertarElemento("Paola", "asd", "fd", arbol, "Solola", "UPS");
 
-    tablero->recorrerTablero();
-    tablero->graficar();
+	//tablero->recorrerTablero();
+	//tablero->graficar();
 }
 
 // Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar

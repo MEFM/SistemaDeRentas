@@ -17,18 +17,18 @@ private:
 	string userName;
 	string contraseña;
 	string nombreCompleto;
-	ActivoRenta rentas;
+	AVL rentas;
 
 
 public:
-	DatosEmpleado(string usernarme, string contraseña, string nombreCompleto, ActivoRenta rentas) {
+	DatosEmpleado(string usernarme, string contraseña, string nombreCompleto, AVL rentas) {
 		this->userName = userName;
 		this->contraseña = contraseña;
 		this->nombreCompleto = nombreCompleto;
 		this->rentas = rentas;
 	}
 
-	DatosEmpleado(string usernarme, string contraseña, string nombreCompleto, ActivoRenta rentas, string departamento, string empresa) {
+	DatosEmpleado(string usernarme, string contraseña, string nombreCompleto, AVL rentas, string departamento, string empresa) {
 		this->userName = usernarme;
 		
 		this->contraseña = contraseña;
@@ -48,7 +48,7 @@ public:
 	void setNombre(string nombre) {
 		this->nombreCompleto;
 	}
-	void setRentas(ActivoRenta renta) {
+	void setRentas(AVL renta) {
 		this->rentas = rentas;
 	}
 	void setDepartamento(string departamento) {
@@ -68,7 +68,7 @@ public:
 	string getUser() {
 		return userName;
 	}
-	ActivoRenta getRentas() {
+	AVL getRentas() {
 		return rentas;
 	}
 	string getDepartamento() {
@@ -127,7 +127,7 @@ public:
 		cabecera = new NodoTablero("", 0);
 	}
 
-	void insertarElemento(string usernarme, string contraseña, string nombreCompleto, ActivoRenta rentas, string departamento, string empresa);
+	void insertarElemento(string usernarme, string contraseña, string nombreCompleto, AVL rentas, string departamento, string empresa);
 
 
 	NodoTablero* buscarNodo(string usuario);
