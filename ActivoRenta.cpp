@@ -2,22 +2,12 @@
 
 
 
-void AVL::Podar(Nodo*& nodo)
-{
-	// Algoritmo recursivo, recorrido en postorden
-	if (nodo) {
-		Podar(nodo->izquierdo); // Podar izquierdo
-		Podar(nodo->derecho);   // Podar derecho
-		delete nodo;            // Eliminar nodo
-		nodo = 0;
-	}
-}
 
-void AVL::insertar(string nombreActivo, const int dat, string descripcion, bool disponibilidad)
+void ActivosRenta::insertar(string nombreActivo, const int dat, string descripcion, bool disponibilidad)
 {
-	Nodo* padre = 0;
+	NodoActivo* padre = 0;
 
-	cout << "Insertar: " << dat << endl;
+
 	actual = raiz;
 
 	while (!(actual == 0) && dat != actual->dato) {
@@ -31,22 +21,22 @@ void AVL::insertar(string nombreActivo, const int dat, string descripcion, bool 
 		return;
 	}
 	if ((padre == 0)) {
-		raiz = new Nodo(nombreActivo, dat, descripcion);
+		raiz = new NodoActivo(nombreActivo, dat, descripcion, disponibilidad);
 	}
 
 	else if (dat < padre->dato) {
-		padre->izquierdo = new Nodo(nombreActivo, dat, descripcion, disponibilidad, padre);
+		padre->izquierdo = new NodoActivo(nombreActivo, dat, descripcion, disponibilidad, padre);
 		equilibrar(padre, IZQUIERDO, true);
 	}
 
 	else if (dat > padre->dato) {
-		padre->derecho = new Nodo(nombreActivo, dat, descripcion, disponibilidad, padre);
+		padre->derecho = new NodoActivo(nombreActivo, dat, descripcion, disponibilidad, padre);
 		equilibrar(padre, DERECHO, true);
 	}
 }
 
 
-void AVL::equilibrar(Nodo* nodo, int rama, bool nuevo)
+void ActivosRenta::equilibrar(NodoActivo* nodo, int rama, bool nuevo)
 {
 	bool salir = false;
 
@@ -76,34 +66,33 @@ void AVL::equilibrar(Nodo* nodo, int rama, bool nuevo)
 	}
 }
 
-void AVL::rotacionDobleDerecha(Nodo* nodo)
+void ActivosRenta::rotacionDobleDerecha(NodoActivo* nodo)
 {
-	cout << "RDD" << endl;
-	Nodo* Padre = nodo->padre;
-	Nodo* P = nodo;
-	Nodo* Q = P->izquierdo;
-	Nodo* R = Q->derecho;
-	Nodo* B = R->izquierdo;
-	Nodo* C = R->derecho;
+
+	NodoActivo* Padre = nodo->padre;
+	NodoActivo* P = nodo;
+	NodoActivo* Q = P->izquierdo;
+	NodoActivo* R = Q->derecho;
+	NodoActivo* B = R->izquierdo;
+	NodoActivo* C = R->derecho;
 
 	if (Padre)
 		if (Padre->derecho == nodo) Padre->derecho = R;
 		else Padre->izquierdo = R;
 	else raiz = R;
 
-	// Reconstruir árbol:
 	Q->derecho = B;
 	P->izquierdo = C;
 	R->izquierdo = Q;
 	R->derecho = P;
 
-	// Reasignar padres:
+
 	R->padre = Padre;
 	P->padre = Q->padre = R;
 	if (B) B->padre = Q;
 	if (C) C->padre = P;
 
-	// Ajustar valores de FE:
+
 	switch (R->FE) {
 	case -1: Q->FE = 0; P->FE = 1; break;
 	case 0:  Q->FE = 0; P->FE = 0; break;
@@ -112,16 +101,15 @@ void AVL::rotacionDobleDerecha(Nodo* nodo)
 	R->FE = 0;
 }
 
-
-void AVL::rotacionDobleIzquierda(Nodo* nodo)
+void ActivosRenta::rotacionDobleIzquierda(NodoActivo* nodo)
 {
 	cout << "RDI" << endl;
-	Nodo* Padre = nodo->padre;
-	Nodo* P = nodo;
-	Nodo* Q = P->derecho;
-	Nodo* R = Q->izquierdo;
-	Nodo* B = R->izquierdo;
-	Nodo* C = R->derecho;
+	NodoActivo* Padre = nodo->padre;
+	NodoActivo* P = nodo;
+	NodoActivo* Q = P->derecho;
+	NodoActivo* R = Q->izquierdo;
+	NodoActivo* B = R->izquierdo;
+	NodoActivo* C = R->derecho;
 
 	if (Padre)
 		if (Padre->derecho == nodo) Padre->derecho = R;
@@ -149,14 +137,13 @@ void AVL::rotacionDobleIzquierda(Nodo* nodo)
 	R->FE = 0;
 }
 
-
-void AVL::rotacionSimpleDerecha(Nodo* nodo)
+void ActivosRenta::rotacionSimpleDerecha(NodoActivo* nodo)
 {
 	cout << "RSD" << endl;
-	Nodo* Padre = nodo->padre;
-	Nodo* P = nodo;
-	Nodo* Q = P->izquierdo;
-	Nodo* B = Q->derecho;
+	NodoActivo* Padre = nodo->padre;
+	NodoActivo* P = nodo;
+	NodoActivo* Q = P->izquierdo;
+	NodoActivo* B = Q->derecho;
 
 	if (Padre)
 		if (Padre->derecho == P) Padre->derecho = Q;
@@ -177,14 +164,13 @@ void AVL::rotacionSimpleDerecha(Nodo* nodo)
 	Q->FE = 0;
 }
 
-
-void AVL::rotacionSimpleIzquierda(Nodo* nodo)
+void ActivosRenta::rotacionSimpleIzquierda(NodoActivo* nodo)
 {
 	cout << "RSI" << endl;
-	Nodo* Padre = nodo->padre;
-	Nodo* P = nodo;
-	Nodo* Q = P->derecho;
-	Nodo* B = Q->izquierdo;
+	NodoActivo* Padre = nodo->padre;
+	NodoActivo* P = nodo;
+	NodoActivo* Q = P->derecho;
+	NodoActivo* B = Q->izquierdo;
 
 	if (Padre)
 		if (Padre->derecho == P) Padre->derecho = Q;
@@ -205,16 +191,16 @@ void AVL::rotacionSimpleIzquierda(Nodo* nodo)
 	Q->FE = 0;
 }
 
-void AVL::eliminar(const int dat)
+void ActivosRenta::eliminar(const int dat)
 {
-	Nodo* padre = 0;
-	Nodo* nodo;
+	NodoActivo* padre = 0;
+	NodoActivo* nodo;
 	int aux;
 
 	actual = raiz;
 	while (!(actual == 0)) {
-		if (dat == actual->dato) { // Si el valor está en el nodo actual
-			if (EsHoja(actual)) { // Y si además es un nodo hoja: lo borramos
+		if (dat == actual->dato) {
+			if (EsHoja(actual)) {
 				if (padre) {
 					if (padre->derecho == actual) {
 						padre->derecho = 0;
@@ -273,42 +259,13 @@ void AVL::eliminar(const int dat)
 	}
 }
 
-
-void AVL::InOrden(void (*func)(int&, int), Nodo* nodo, bool r)
-{
-	if (r) nodo = raiz;
-	if (nodo->izquierdo) InOrden(func, nodo->izquierdo, false);
-	func(nodo->dato, nodo->FE);
-	if (nodo->derecho) InOrden(func, nodo->derecho, false);
-}
-
-
-void AVL::PreOrden(void (*func)(int&, int), Nodo* nodo, bool r)
-{
-	if (r) nodo = raiz;
-	cout << nodo->nombreActivo << endl;
-	func(nodo->dato, nodo->FE);
-	if (nodo->izquierdo) PreOrden(func, nodo->izquierdo, false);
-	if (nodo->derecho) PreOrden(func, nodo->derecho, false);
-}
-
-
-void AVL::PostOrden(void (*func)(int&, int), Nodo* nodo, bool r)
-{
-	if (r) nodo = raiz;
-	if (nodo->izquierdo) PostOrden(func, nodo->izquierdo, false);
-	if (nodo->derecho) PostOrden(func, nodo->derecho, false);
-	func(nodo->dato, nodo->FE);
-}
-
-
-void AVL::recor() {
+void ActivosRenta::recor() {
 	if (this->raiz != 0) {
 		this->recor(raiz);
 	}
 }
 
-void AVL::recor(Nodo* nodo) {
+void ActivosRenta::recor(NodoActivo* nodo) {
 	if (nodo != 0) {
 		cout << nodo->nombreActivo << endl;
 		recor(nodo->izquierdo);
@@ -316,7 +273,7 @@ void AVL::recor(Nodo* nodo) {
 	}
 }
 
-bool AVL::buscar(const int dat)
+bool ActivosRenta::buscar(const int dat)
 {
 	actual = raiz;
 
@@ -329,8 +286,7 @@ bool AVL::buscar(const int dat)
 	return false; // No está en árbol
 }
 
-// Calcular la altura del nodo que contiene el dato dat
-int AVL::Altura(const int dat)
+int ActivosRenta::Altura(const int dat)
 {
 	int altura = 0;
 	actual = raiz;
@@ -347,18 +303,16 @@ int AVL::Altura(const int dat)
 	return -1; // No está en árbol
 }
 
-// Contar el número de nodos
-const int AVL::NumeroNodos()
+
+const int ActivosRenta::NumeroNodos()
 {
 	contador = 0;
 
-	auxContador(raiz); // FUnción auxiliar
+	auxContador(raiz);
 	return contador;
 }
 
-// Función auxiliar para contar nodos. Función recursiva de recorrido en
-//   preorden, el proceso es aumentar el contador
-void AVL::auxContador(Nodo* nodo)
+void ActivosRenta::auxContador(NodoActivo* nodo)
 {
 	contador++;  // Otro nodo
 	// Continuar recorrido
@@ -366,8 +320,8 @@ void AVL::auxContador(Nodo* nodo)
 	if (nodo->derecho)   auxContador(nodo->derecho);
 }
 
-// Calcular la altura del árbol, que es la altura del nodo de mayor altura.
-const int AVL::AlturaArbol()
+
+const int ActivosRenta::AlturaArbol()
 {
 	altura = 0;
 
@@ -375,17 +329,73 @@ const int AVL::AlturaArbol()
 	return altura;
 }
 
+void ActivosRenta::inOrden() {
+	if (raiz != 0)
+		inOrden(this->raiz);
+	else
+		cout << "No hay nada en el arbol brou" << endl;
+}
 
+void ActivosRenta::inOrden(NodoActivo* nodo) {
+	if (nodo != 0) {
+		inOrden(nodo->izquierdo);
+		cout << nodo->nombreActivo << endl;
+		inOrden(nodo->derecho);
+	}
+}
 
+void ActivosRenta::preOrden() {
+	if (raiz != 0)
+		preOrden(this->raiz);
+	else
+		cout << "No hay arbol bro" << endl;
+}
 
-void AVL::auxAltura(Nodo* nodo, int a)
+void ActivosRenta::preOrden(NodoActivo* nodo) {
+	if (nodo != 0) {
+		cout << nodo->nombreActivo << endl;
+		preOrden(nodo->izquierdo);
+		preOrden(nodo->derecho);
+	}
+}
+
+void ActivosRenta::postOrden() {
+	if (raiz != 0)
+		postOrden(this->raiz);
+	else
+		cout << "No hay arbol para recorrer" << endl;
+}
+
+void ActivosRenta::postOrden(NodoActivo* nodo) {
+	if (nodo != 0) {
+		postOrden(nodo->izquierdo);
+		postOrden(nodo->derecho);
+		cout << nodo->nombreActivo << endl;
+	}
+}
+
+void ActivosRenta::auxAltura(NodoActivo* nodo, int a)
 {
-	// Recorrido postorden
+
 	if (nodo->izquierdo) auxAltura(nodo->izquierdo, a + 1);
 	if (nodo->derecho)   auxAltura(nodo->derecho, a + 1);
-	// Proceso, si es un nodo hoja, y su altura es mayor que la actual del
-	// árbol, actualizamos la altura actual del árbol
+
 	if (EsHoja(nodo) && a > altura) altura = a;
 }
 
+void ActivosRenta::reservados() {
+	if (this->raiz != 0)
+		reservados(this->raiz);
+	else
+		cout << "No hay activos" << endl;
+}
 
+void ActivosRenta::reservados(NodoActivo* nodo) {
+	if (nodo != 0) {
+		if (nodo->disponibilidad == false) {
+			cout << "Alquilado " << nodo->nombreActivo << endl;
+		}
+		reservados(nodo->izquierdo);
+		reservados(nodo->derecho);
+	}
+}

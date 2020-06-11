@@ -9,7 +9,7 @@
 using namespace std;
 
 Tablero* tablero = new Tablero();
-AVL rentas;
+ActivosRenta rentas;
 
 void Mostrar(int& d, int FE)
 {
@@ -17,25 +17,17 @@ void Mostrar(int& d, int FE)
 }
 
 //Area general
-void logIn(string, string);
+void logIn();
 /*__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--*/
 
 //Esto es para el area de administrador
 void registrarUsuario();
-void registrarInmueble();
-void reportesMatriz();
-void transaccion();
-/*__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--*/
-
-//Esto es para El usuario
-void agregarA(AVL);
-void eliminarActivo(AVL);
-void modificarActivo(AVL);
-void rentarActivo(AVL);
+void activosUser() {};
+void rentasCsuario() {};
 
 
 
-
+void ordenarTransac() {};
 
 /*__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--*/
 void menuAdministrador() {
@@ -43,7 +35,7 @@ void menuAdministrador() {
 	bool validador = true;
 
 	while (validador) {
-		//
+		
 		cout << "----------------Bienvenido al sistema de rentas----------------" << endl;
 		cout << "-----------------------------Menu------------------------------" << endl;
 		cout << "1. Registrar usuario" << endl;
@@ -54,6 +46,7 @@ void menuAdministrador() {
 		cout << "6. Activos de un usuario" << endl;
 		cout << "7. Activos rentados por un usuario" << endl;
 		cout << "8. Ordenar transacciones" << endl;
+		cout << "9. Salir de modo admin." << endl;
 
 		cout << "Ingrese una opcion" << endl;
 		cin >> opcion;
@@ -64,16 +57,33 @@ void menuAdministrador() {
 			registrarUsuario();
 			break;
 		case 2:
+			tablero->graficar();
 			break;
 		case 3:
+			//Crear metodo para sacar los metodos de cada departamento
+			//tablero->graficasDepartamento();
+			/*
+				Tiene que ser un menu con las posibilidades de generar
+				los reportes de todos los usuarios de un mes
+				cagadales
+			*/
 			break;
 		case 5:
+			//Crear metodo para sacar los metodos de cada empresa
+						//tablero->graficasEmpresa();
+			/*
+				Tiene que ser un menu con las posibilidades de generar
+				los reportes de todos los usuarios de una empresa
+				cagadales
+			*/
 			break;
 		case 6:
 			break;
 		case 7:
+			rentasCsuario();
 			break;
 		case 8:
+			ordenarTransac();
 			break;
 		case 9:
 			validador = false;
@@ -106,8 +116,28 @@ void registrarUsuario() {
 	cin.getline((char*)empresa.c_str(), 100, '\n');
 	cin.ignore();
 
-	tablero->insertarElemento(userName, contrasea, nombreCompleto, AVL(), departamento, empresa);
+	tablero->insertarElemento(userName, contrasea, nombreCompleto, ActivosRenta(), departamento, empresa);
 }
+void rentasCsuario() {
+//Usuario a buscar 
+	string userUsuario;
+	cin.getline((char*)userUsuario.c_str(),100,'\n');
+	cin.ignore();
+	
+	NodoTablero* usuario = tablero->buscarNodo(userUsuario);
+	//Llamar a metodo de graficar arbol de usuario
+
+}
+
+/*__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--*/
+
+//Esto es para El usuario
+void agregarA(ActivosRenta) {};
+void eliminarActivo(ActivosRenta) {};
+void modificarActivo(ActivosRenta) {};
+void rentarActivo(ActivosRenta) {};
+void activosRentados() {};
+void misActivosRentados(ActivosRenta) {};
 
 void menuUsuario(NodoTablero* usuario) {
 	int opcion = 0;
@@ -131,25 +161,27 @@ void menuUsuario(NodoTablero* usuario) {
 		switch (opcion)
 		{
 		case 1:
-
+			agregarA(usuario->empleado->getRentas());
 			break;
 		case 2:
-
+			eliminarActivo(usuario->empleado->getRentas());
 			break;
 		case 3:
-
+			modificarActivo(usuario->empleado->getRentas());
 			break;
 		case 4:
-
+			rentarActivo(usuario->empleado->getRentas());
 			break;
 		case 5:
-			//Hacer recorrido de activos rentados
+			activosRentados();
 			break;
 		case 6:
 			//Hacer recorrido de mis activos rentados(por usuario)
+			misActivosRentados(usuario->empleado->getRentas());
 			break;
 		case 7:
 			//Salir a Log in
+			validador = false;
 			break;
 		default:
 			break;
@@ -172,7 +204,7 @@ int main()
 		cout << "Hm" << endl;
 	}
 
-	AVL arbol;
+	ActivosRenta arbol;
 
 	arbol.insertar("Hol", 10, "", true);
 	arbol.insertar("Mi", 5, "", false);
@@ -187,6 +219,11 @@ int main()
 	//arbol.InOrden(Mostrar);
 
 	arbol.recor();
+
+	cout << endl << endl << "Alquilados" << endl;
+	arbol.reservados();
+	
+
 
 	Tablero* tablero = new Tablero();
 

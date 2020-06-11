@@ -1,7 +1,7 @@
 #include "Tablero.h"
 
 NodoTablero* Tablero::crearEmpresa(string empresa) {
-	NodoTablero* empre = new NodoTablero(empresa, new DatosEmpleado("", "", "", AVL(), "", ""));
+	NodoTablero* empre = new NodoTablero(empresa, new DatosEmpleado("", "", "", ActivosRenta(), "", ""));
 
 	NodoTablero* auxiliar = this->cabecera;
 
@@ -16,7 +16,8 @@ NodoTablero* Tablero::crearEmpresa(string empresa) {
 }
 
 NodoTablero* Tablero::crearDepartamento(string departamento) {
-	NodoTablero* depa = new NodoTablero(departamento, new DatosEmpleado("", "", "", AVL(), "", ""));
+	NodoTablero* depa = 
+		new NodoTablero(departamento, new DatosEmpleado("", "", "", ActivosRenta(), "", ""));
 	NodoTablero* auxiliar = this->cabecera;
 
 	while (auxiliar->siguiente != 0) {
@@ -87,7 +88,7 @@ bool Tablero::verificarEmpresa(string empresa, NodoTablero* inicio, NodoTablero*
 	return false;
 }
 
-void Tablero::insertarElemento(string usernarme, string contraseña, string nombreCompleto, AVL rentas, string departamento, string empresa) {
+void Tablero::insertarElemento(string usernarme, string contraseña, string nombreCompleto, ActivosRenta rentas, string departamento, string empresa) {
 
 	NodoTablero* nUsuario = new NodoTablero("",
 		new DatosEmpleado(usernarme, contraseña, nombreCompleto, rentas, departamento, empresa));
