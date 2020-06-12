@@ -81,7 +81,7 @@ private:
 
 
 	void reservados(NodoActivo* nodo);
-	void libres(void (*func)(int&, int), NodoActivo* nodo = NULL, bool r = true);
+	void libres(NodoActivo* nodo);
 
 	void inOrden(NodoActivo* nodo);
 	void preOrden(NodoActivo* nodo);
@@ -89,7 +89,8 @@ private:
 
 	void recor(NodoActivo* nodo);
 
-
+	void graficar(NodoActivo* nodo);
+	NodoActivo* buscarActivo(NodoActivo* nodo, int id);
 
 
 public:
@@ -107,11 +108,15 @@ public:
 	void reservados();
 	void libres();
 
+	NodoActivo* buscarActivo(int id);
+
+	void modificar(int aReemplazar, string nombreActivo, const int dat, string descripcion, bool disponibilidad);
+
 	void inOrden();
 	void preOrden();
 	void postOrden();
 
-
+	void graficar();
 
 
 };

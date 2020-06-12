@@ -8,6 +8,8 @@
 
 using namespace std;
 
+int idHistorialActivos;
+
 Tablero* tablero = new Tablero();
 ActivosRenta rentas;
 
@@ -23,7 +25,7 @@ void logIn();
 //Esto es para el area de administrador
 void registrarUsuario();
 void activosUser() {};
-void rentasCsuario() {};
+void rentasCsuario();
 
 
 
@@ -35,7 +37,7 @@ void menuAdministrador() {
 	bool validador = true;
 
 	while (validador) {
-		
+
 		cout << "----------------Bienvenido al sistema de rentas----------------" << endl;
 		cout << "-----------------------------Menu------------------------------" << endl;
 		cout << "1. Registrar usuario" << endl;
@@ -119,12 +121,13 @@ void registrarUsuario() {
 	tablero->insertarElemento(userName, contrasea, nombreCompleto, ActivosRenta(), departamento, empresa);
 }
 void rentasCsuario() {
-//Usuario a buscar 
+	//Usuario a buscar 
 	string userUsuario;
-	cin.getline((char*)userUsuario.c_str(),100,'\n');
+	cin.getline((char*)userUsuario.c_str(), 100, '\n');
 	cin.ignore();
-	
+
 	NodoTablero* usuario = tablero->buscarNodo(userUsuario);
+
 	//Llamar a metodo de graficar arbol de usuario
 
 }
@@ -132,9 +135,9 @@ void rentasCsuario() {
 /*__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--*/
 
 //Esto es para El usuario
-void agregarA(ActivosRenta) {};
-void eliminarActivo(ActivosRenta) {};
-void modificarActivo(ActivosRenta) {};
+void agregarA(ActivosRenta);
+void eliminarActivo(ActivosRenta);
+void modificarActivo(ActivosRenta);
 void rentarActivo(ActivosRenta) {};
 void activosRentados() {};
 void misActivosRentados(ActivosRenta) {};
@@ -191,6 +194,63 @@ void menuUsuario(NodoTablero* usuario) {
 
 
 }
+void agregarA(ActivosRenta arbolUsuario) {
+	cout << "Todos los activos ingresados en este apartado seran disponibles." << endl;
+	cout << "-----------------------Agregar activos-----------------------" << endl;
+	string nombreActivo, descripcion;
+	int codigo;
+	//Lo siento solo lo pude hacer con enteros
+	cout << "Ingrese el ID del activo, no repetido." << endl;
+	cin >> codigo;
+	if (arbolUsuario.buscar(codigo) == true) {
+		cout << "Codigo previamente ingresado" << endl;
+		return;
+	}
+	cout << "Ingrese nombre del activo." << endl;
+	cin.getline((char*)nombreActivo.c_str(), 100, '\n');
+	cin.ignore();
+	cout << "Ingrese descripcion." << endl;
+	cin.getline((char*)descripcion.c_str(), 100, '\n');
+	cin.ignore();
+
+	arbolUsuario.insertar(nombreActivo, codigo, descripcion, true);
+
+}
+
+void eliminarActivo(ActivosRenta arbolUsuario) {
+	cout << "Los activos aca eliminados no tienen reposicion" << endl;
+	cout << "-----------------Eliminar activos de cartera-----------------" << endl;
+	arbolUsuario.libres();
+	cout << endl << endl;
+	int id;
+	cout << "Ingrese ID a eliminar" << endl;
+	cin >> id;
+	if (arbolUsuario.buscar(id) == true) {
+		if (arbolUsuario.buscarActivo(id)->disponibilidad == false) {
+			cout << "El activo no esta disponible " << endl;
+		}
+		else {
+			arbolUsuario.eliminar(id);
+		}
+	}
+	else {
+		cout << "Ni si quiera existe man ajajaja" << endl;
+	}
+
+}
+
+void modificarActivo(ActivosRenta arbolUsuario) {
+	cout << "Los cambios son irreversibles." << endl;
+	cout << "--------------------Modificacion Activo--------------------" << endl;
+	cout << endl << endl;
+	arbolUsuario.libres();
+	cout << endl;
+	int idModificar;
+	cout << "Ingresa el ID del activo a modificar" << endl;
+	cin >> idModificar;
+}
+
+
 
 int main()
 {
@@ -216,22 +276,28 @@ int main()
 	arbol.insertar("Mk", 17, "", true);
 	arbol.insertar("Ml", 15, "", true);
 
+	arbol.eliminar(17);
+	arbol.modificar(10, "Este fue modificado", 50, "", true);
+
+	arbol.preOrden();
 	//arbol.InOrden(Mostrar);
 
-	arbol.recor();
 
-	cout << endl << endl << "Alquilados" << endl;
-	arbol.reservados();
-	
+	//arbol.recor();
+
+	cout << endl << endl << "Estos metodos son lso que estan implementados ya en mi proyecto" << endl;
+	cout << "Por eso es diferente a los metodos de la tarea." << endl;
+	//arbol.reservados();
 
 
+	/*
 	Tablero* tablero = new Tablero();
 
 	tablero->insertarElemento("Mynor", "Mynor", "fd", arbol, "Guate", "max");
 	tablero->insertarElemento("Diana", "asd", "fd", arbol, "Jalapa", "Qla");
 	tablero->insertarElemento("Estuardo", "asd", "fd", arbol, "Jutipa", "PFA");
 	tablero->insertarElemento("Paola", "asd", "fd", arbol, "Solola", "UPS");
-
+	*/
 	//tablero->recorrerTablero();
 	//tablero->graficar();
 }

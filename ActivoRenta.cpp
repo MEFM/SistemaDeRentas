@@ -103,7 +103,7 @@ void ActivosRenta::rotacionDobleDerecha(NodoActivo* nodo)
 
 void ActivosRenta::rotacionDobleIzquierda(NodoActivo* nodo)
 {
-	cout << "RDI" << endl;
+	
 	NodoActivo* Padre = nodo->padre;
 	NodoActivo* P = nodo;
 	NodoActivo* Q = P->derecho;
@@ -139,7 +139,7 @@ void ActivosRenta::rotacionDobleIzquierda(NodoActivo* nodo)
 
 void ActivosRenta::rotacionSimpleDerecha(NodoActivo* nodo)
 {
-	cout << "RSD" << endl;
+	
 	NodoActivo* Padre = nodo->padre;
 	NodoActivo* P = nodo;
 	NodoActivo* Q = P->izquierdo;
@@ -166,7 +166,7 @@ void ActivosRenta::rotacionSimpleDerecha(NodoActivo* nodo)
 
 void ActivosRenta::rotacionSimpleIzquierda(NodoActivo* nodo)
 {
-	cout << "RSI" << endl;
+
 	NodoActivo* Padre = nodo->padre;
 	NodoActivo* P = nodo;
 	NodoActivo* Q = P->derecho;
@@ -397,5 +397,61 @@ void ActivosRenta::reservados(NodoActivo* nodo) {
 		}
 		reservados(nodo->izquierdo);
 		reservados(nodo->derecho);
+	}
+}
+
+
+void ActivosRenta::modificar(int aReemplazar, string nombreActivo, const int dat, string descripcion, bool disponibilidad) {
+	if (this->raiz != 0) {
+		this->eliminar(aReemplazar);
+		this->insertar(nombreActivo, dat, descripcion, disponibilidad);
+	}
+	else {
+		cout << "No hay nada en el arbol" << endl;
+	}
+}
+
+
+
+NodoActivo* ActivosRenta::buscarActivo(int id) {
+	if (this->raiz != 0) {
+		return buscarActivo(this->raiz, id);
+	}
+	else {
+		cout << "No hay actios para este usuario" << endl;
+		return 0;
+	}
+}
+
+NodoActivo* ActivosRenta::buscarActivo(NodoActivo* nodo, int id) {
+	if (nodo != 0) {
+		if (id < nodo->dato) {
+			buscarActivo(nodo->izquierdo, id);
+		}
+		else if (id > nodo->dato) {
+			buscarActivo(nodo->derecho, id);
+		}
+		else {
+			return nodo;
+		}
+	}
+}
+
+void ActivosRenta::libres() {
+	if (this->raiz != 0) {
+		this->libres(this->raiz);
+	}
+	else {
+		cout << "No hay activos en este usuario." << endl;
+	}
+}
+
+void ActivosRenta::libres(NodoActivo* nodo) {
+	if (nodo != 0) {
+		if (nodo->disponibilidad == true) {
+			cout << "Id: " << nodo->dato << "Nombre activo" << nodo->nombreActivo << "Disponibilidad: Disponible" << endl;
+		}
+		libres(nodo->izquierdo);
+		libres(nodo->derecho);
 	}
 }

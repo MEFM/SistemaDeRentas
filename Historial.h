@@ -6,17 +6,16 @@
 using namespace std;
 
 class NodoHistorial {
-private:
+public:
 	NodoHistorial* siguiente;
 	NodoHistorial* anterior;
 
-	string codigo;
+	int codigo;
 	NodoTablero* usuario;
 	string fechaRenta;
 	string tiempoRenta;
 
-public:
-	NodoHistorial(string codigo, NodoTablero* usuario, string fecha, string tiempo) {
+	NodoHistorial(int codigo, NodoTablero* usuario, string fecha, string tiempo) {
 		this->siguiente = 0;
 		this->anterior = 0;
 
@@ -29,5 +28,18 @@ public:
 
 class Historial
 {
+private:
+	NodoHistorial* primero;
+	NodoHistorial* ultimo;
+public:
+	Historial() {
+		this->primero = 0;
+		this->ultimo = 0;
+	}
+
+	void insertar(int id, NodoTablero* usuario, string fecha, string tiempo);
+	void ordenarMayorMenor();
+	void ordenarMenorMayor();
+
 };
 
