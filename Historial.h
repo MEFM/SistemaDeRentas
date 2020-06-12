@@ -40,6 +40,9 @@ public:
 	void insertar(int id, NodoTablero* usuario, string fecha, string tiempo);
 	void ordenarMayorMenor();
 	void ordenarMenorMayor();
+	
+	void graficar();
+	void graficarXusuario(int id);
 
 };
 

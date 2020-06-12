@@ -240,7 +240,7 @@ void eliminarActivo(ActivosRenta arbolUsuario) {
 }
 
 void modificarActivo(ActivosRenta arbolUsuario) {
-	cout << "Los cambios son irreversibles." << endl;
+	cout << "Los cambios son irreversibles. SIN ESPACIOS, SOLO '-'." << endl;
 	cout << "--------------------Modificacion Activo--------------------" << endl;
 	cout << endl << endl;
 	arbolUsuario.libres();
@@ -248,6 +248,30 @@ void modificarActivo(ActivosRenta arbolUsuario) {
 	int idModificar;
 	cout << "Ingresa el ID del activo a modificar" << endl;
 	cin >> idModificar;
+	if (arbolUsuario.buscar(idModificar) == true) {
+		NodoActivo* activo = arbolUsuario.buscarActivo(idModificar);
+		if (activo->disponibilidad == true) {
+			cout << "entr" << endl;
+			string gfd, descripcion;
+		
+			cout << "Cambiar nombre activo: " << endl;
+			cin >> gfd;
+			cout << "Agregar nueva descripcion: " << endl;
+			cin >> descripcion;
+			cout << gfd << endl;
+			cout << descripcion << endl;
+			arbolUsuario.modificar(idModificar, gfd, idModificar, descripcion, true);
+
+			cout << "" << endl;
+		}
+		else {
+			cout << "Activo que quieres reemplazar esta ocupado." << endl;
+			return;
+		}
+	}
+	else {
+		cout << "El activo buscado no existe" << endl;
+	}
 }
 
 
@@ -276,11 +300,11 @@ int main()
 	arbol.insertar("Mk", 17, "", true);
 	arbol.insertar("Ml", 15, "", true);
 
-	arbol.eliminar(17);
-	arbol.modificar(10, "Este fue modificado", 50, "", true);
+
+	modificarActivo(arbol);
 
 	arbol.preOrden();
-	//arbol.InOrden(Mostrar);
+
 
 
 	//arbol.recor();

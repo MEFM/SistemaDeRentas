@@ -32,6 +32,7 @@ public:
 		this->padre = pad;
 
 	}
+	
 
 	NodoActivo(string nombreActivo, const int codigo, string descripcion, bool disponibilidad, NodoActivo* pad = NULL, NodoActivo* izq = NULL, NodoActivo* der = NULL) {
 		this->dato = codigo;
@@ -45,6 +46,9 @@ public:
 
 	}
 
+	void setNombreAc(string nombre) {
+		this->nombreActivo = nombre;
+	}
 
 	friend class AVL;
 };

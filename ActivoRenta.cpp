@@ -353,7 +353,7 @@ void ActivosRenta::preOrden() {
 
 void ActivosRenta::preOrden(NodoActivo* nodo) {
 	if (nodo != 0) {
-		cout << nodo->nombreActivo << endl;
+		cout << nodo->dato << " "<< nodo->nombreActivo  << endl;
 		preOrden(nodo->izquierdo);
 		preOrden(nodo->derecho);
 	}
