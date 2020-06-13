@@ -1,45 +1,85 @@
 digraph a{
 node[shape=box];
-00862270[ label = "Matrix", width = 1.5, style = filled, fillcolor = firebrick1, group = 1 ];
-U008635D0 [label = "max"    pos = "5.3, 3.5!" width = 1.5 style = filled, fillcolor = bisque1, group = 1 ];
-U008641B0 [label = "Qla"    pos = "5.3, 3.5!" width = 1.5 style = filled, fillcolor = bisque1, group = 1 ];
-U00864588 [label = "PFA"    pos = "5.3, 3.5!" width = 1.5 style = filled, fillcolor = bisque1, group = 1 ];
-U00865168 [label = "UPS"    pos = "5.3, 3.5!" width = 1.5 style = filled, fillcolor = bisque1, group = 1 ];
-00862270->U008635D0
-U008635D0-> U008641B0
-U008641B0-> U00864588
-U008641B0-> U008635D0
-U00864588-> U00865168
-U00864588-> U008641B0
-U00865168-> U00864588
+C014B6570[ label = "Matrix", width = 1.5, style = filled, fillcolor = firebrick1, group = 1 ];
+U0 [label = "guatemala"    pos = "5.3, 3.5!" width = 1.5 style = filled, fillcolor = bisque1, group = 1 ];
+U1 [label = "jutiapa"    pos = "5.3, 3.5!" width = 1.5 style = filled, fillcolor = bisque1, group = 1 ];
+U2 [label = "jalapa"    pos = "5.3, 3.5!" width = 1.5 style = filled, fillcolor = bisque1, group = 1 ];
+C014B6570->U0
+U0-> U1
+U1-> U0
+U1-> U2
+U2-> U1
+U2-> U3
+U3-> U2
 
 
-A00860F30 [label = Guate   width = 1.5 style = filled, fillcolor = lightskyblue, group = 2 ];
-A00863860 [label = Jalapa   width = 1.5 style = filled, fillcolor = lightskyblue, group = 3 ];
-A00864440 [label = Jutipa   width = 1.5 style = filled, fillcolor = lightskyblue, group = 4 ];
-A00865020 [label = Solola   width = 1.5 style = filled, fillcolor = lightskyblue, group = 5 ];
-00862270->A00860F30
-A00860F30-> A00863860
-A00863860-> A00864440
-A00863860-> A00860F30
-A00864440-> A00865020
-A00864440-> A00863860
-A00865020-> A00864440
+A0 [label = max   width = 1.5 style = filled, fillcolor = lightskyblue, group = 2 ];
+A1 [label = hp   width = 1.5 style = filled, fillcolor = lightskyblue, group = 3 ];
+A2 [label = walmart   width = 1.5 style = filled, fillcolor = lightskyblue, group = 4 ];
+C014B6570->A0
+A0-> A1
+A1-> A0
+A1-> A2
+A2-> A1
+A2-> A3
+A3-> A2
 {rank = same;
-00862270;
-A00860F30;
-A00863860;
-A00864440;
-A00865020;
+C014B6570;
+A0;
+A1;
+A2;
 }
 
 
-N008635D0_L00860EA8 [label = "Mynor" width = 1.5, group = 2 ];
-N008641B0_L00863718 [label = "Diana" width = 1.5, group = 3 ];
-N00864588_L008642F8 [label = "Estuardo" width = 1.5, group = 4 ];
-N00865168_L008646D0 [label = "Paola" width = 1.5, group = 5 ];
-U008635D0->N008635D0_L00860EA8
-U008641B0->N008641B0_L00863718
-U00864588->N00864588_L008642F8
-U00865168->N00865168_L008646D0
+N0[label ="Mynor" width = 1.5, group =0];
+N1[label ="Albrto" width = 1.5, group =0];
+N2[label ="andres" width = 1.5, group =0];
+N3[label ="Mynor" width = 1.5, group =0];
+N4[label ="susan" width = 1.5, group =0];
+N5[label ="willy" width = 1.5, group =0];
+N6[label ="sucel" width = 1.5, group =0];
+N7[label ="roxana" width = 1.5, group =0];
+N8[label ="andrea" width = 1.5, group =0];
+N9[label ="sebas" width = 1.5, group =0];
+
+U0-> N0
+N0->U0
+A0->N0;
+N0->A0;
+N1->N0;
+N0->N1;
+N2->N1;
+N1->N2;
+N3->N1;
+N1->N3;
+A1->N3;
+N3->A1;
+N4-> N3
+N3-> N4
+A2->N4;
+N4->A2;
+U1-> N5
+N5->U1
+N5->N0;
+N0->N5;
+U2-> N6
+N6->U2
+N6->N0;
+N0->N6;
+N7-> N6
+N6-> N7
+N7->N0;
+N0->N7;
+N8-> N7
+N7-> N8
+N8->N0;
+N0->N8;
+N9->N8;
+N8->N9;
+N10->N9;
+N9->N10;
+
+{rank = same;U0;N0;N1;N2;}
+{rank = same;U1;N3;}
+{rank = same;U2;N4;N5;N6;}
 }

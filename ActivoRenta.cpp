@@ -89,21 +89,31 @@ void ActivosRenta::rotacionDobleDerecha(NodoActivo* nodo)
 
 	R->padre = Padre;
 	P->padre = Q->padre = R;
-	if (B) B->padre = Q;
-	if (C) C->padre = P;
+	if (B) {
+		B->padre = Q;
+	}
+	if (C) {
+		C->padre = P;
+	}
 
 
 	switch (R->FE) {
-	case -1: Q->FE = 0; P->FE = 1; break;
-	case 0:  Q->FE = 0; P->FE = 0; break;
-	case 1:  Q->FE = -1; P->FE = 0; break;
+	case -1:
+		Q->FE = 0; P->FE = 1;
+		break;
+	case 0:
+		Q->FE = 0; P->FE = 0;
+		break;
+	case 1:
+		Q->FE = -1; P->FE = 0;
+		break;
 	}
 	R->FE = 0;
 }
 
 void ActivosRenta::rotacionDobleIzquierda(NodoActivo* nodo)
 {
-	
+
 	NodoActivo* Padre = nodo->padre;
 	NodoActivo* P = nodo;
 	NodoActivo* Q = P->derecho;
@@ -139,7 +149,7 @@ void ActivosRenta::rotacionDobleIzquierda(NodoActivo* nodo)
 
 void ActivosRenta::rotacionSimpleDerecha(NodoActivo* nodo)
 {
-	
+
 	NodoActivo* Padre = nodo->padre;
 	NodoActivo* P = nodo;
 	NodoActivo* Q = P->izquierdo;
@@ -353,7 +363,13 @@ void ActivosRenta::preOrden() {
 
 void ActivosRenta::preOrden(NodoActivo* nodo) {
 	if (nodo != 0) {
-		cout << nodo->dato << " "<< nodo->nombreActivo  << endl;
+		if (nodo->disponibilidad == true) {
+			cout << "Id: " << nodo->dato << " Nombre activo: " << nodo->nombreActivo << " Disponibilidad: Disponible" << endl;
+		}
+		else {
+			cout << "Id: " << nodo->dato << " Nombre activo: " << nodo->nombreActivo << " Disponibilidad: No Disponible" << endl;
+		}
+
 		preOrden(nodo->izquierdo);
 		preOrden(nodo->derecho);
 	}
@@ -383,24 +399,6 @@ void ActivosRenta::auxAltura(NodoActivo* nodo, int a)
 	if (EsHoja(nodo) && a > altura) altura = a;
 }
 
-void ActivosRenta::reservados() {
-	if (this->raiz != 0)
-		reservados(this->raiz);
-	else
-		cout << "No hay activos" << endl;
-}
-
-void ActivosRenta::reservados(NodoActivo* nodo) {
-	if (nodo != 0) {
-		if (nodo->disponibilidad == false) {
-			cout << "Alquilado " << nodo->nombreActivo << endl;
-		}
-		reservados(nodo->izquierdo);
-		reservados(nodo->derecho);
-	}
-}
-
-
 void ActivosRenta::modificar(int aReemplazar, string nombreActivo, const int dat, string descripcion, bool disponibilidad) {
 	if (this->raiz != 0) {
 		this->eliminar(aReemplazar);
@@ -410,8 +408,6 @@ void ActivosRenta::modificar(int aReemplazar, string nombreActivo, const int dat
 		cout << "No hay nada en el arbol" << endl;
 	}
 }
-
-
 
 NodoActivo* ActivosRenta::buscarActivo(int id) {
 	if (this->raiz != 0) {
@@ -437,6 +433,24 @@ NodoActivo* ActivosRenta::buscarActivo(NodoActivo* nodo, int id) {
 	}
 }
 
+
+void ActivosRenta::reservados() {
+	if (this->raiz != 0)
+		reservados(this->raiz);
+	else
+		cout << "No hay activos" << endl;
+}
+
+void ActivosRenta::reservados(NodoActivo* nodo) {
+	if (nodo != 0) {
+		if (nodo->disponibilidad == false) {
+			cout << "Id: " << nodo->dato << " Nombre activo: " << nodo->nombreActivo << " Disponibilidad: Alquilado" << endl;
+		}
+		reservados(nodo->izquierdo);
+		reservados(nodo->derecho);
+	}
+}
+
 void ActivosRenta::libres() {
 	if (this->raiz != 0) {
 		this->libres(this->raiz);
@@ -449,7 +463,7 @@ void ActivosRenta::libres() {
 void ActivosRenta::libres(NodoActivo* nodo) {
 	if (nodo != 0) {
 		if (nodo->disponibilidad == true) {
-			cout << "Id: " << nodo->dato << "Nombre activo" << nodo->nombreActivo << "Disponibilidad: Disponible" << endl;
+			cout << "Id: " << nodo->dato << " Nombre activo: " << nodo->nombreActivo << " Disponibilidad: Disponible" << endl;
 		}
 		libres(nodo->izquierdo);
 		libres(nodo->derecho);

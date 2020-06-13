@@ -11,11 +11,14 @@ public:
 	NodoHistorial* anterior;
 
 	int codigo;
+	string nombreActivo;
 	NodoTablero* usuario;
 	string fechaRenta;
 	string tiempoRenta;
+	string alfaNumerico;
+	bool disponibilidad;
 
-	NodoHistorial(int codigo, NodoTablero* usuario, string fecha, string tiempo) {
+	NodoHistorial(string alfaNumerico,int codigo,string nombreaActivo,NodoTablero* usuario, string fecha, string tiempo) {
 		this->siguiente = 0;
 		this->anterior = 0;
 
@@ -23,6 +26,8 @@ public:
 		this->usuario = usuario;
 		this->fechaRenta = fecha;
 		this->tiempoRenta = tiempo;
+		this->alfaNumerico = alfaNumerico;
+
 	}
 };
 
@@ -31,16 +36,18 @@ class Historial
 private:
 	NodoHistorial* primero;
 	NodoHistorial* ultimo;
+	int contador;
 public:
 	Historial() {
 		this->primero = 0;
 		this->ultimo = 0;
 	}
 
-	void insertar(int id, NodoTablero* usuario, string fecha, string tiempo);
+	void insertar(string alfaNumerico,int id,string nombreActivo, NodoTablero* usuario, string fecha, string tiempo);
 	void ordenarMayorMenor();
 	void ordenarMenorMayor();
-	
+	void recorrer();
+	bool verificarExistencia(int id);
 	void graficar();
 	void graficarXusuario(int id);
 

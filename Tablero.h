@@ -121,6 +121,9 @@ private:
 
 	NodoTablero* buscarEmpresa(string empresa, NodoTablero*);
 	NodoTablero* buscarDepa(string departamento, NodoTablero*);
+
+	int grupoColumna(NodoTablero*);
+	int idGrupoColumna(NodoTablero*);
 public:
 	Tablero() {
 		//Aca va iniciado el nodo raiz
@@ -131,6 +134,7 @@ public:
 
 
 	NodoTablero* buscarNodo(string usuario);
+	NodoTablero* buscarNodo(string usuario, string departamento, string empresa);//Metodo de soporte
 
 	bool verificarEmpresa(string empresa, NodoTablero* inicio, NodoTablero* nodoUsuario);
 	bool verificarDepa(string empresa, NodoTablero* inicio, NodoTablero* nodoUsuario);

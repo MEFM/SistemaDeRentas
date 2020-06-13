@@ -2,16 +2,23 @@
 //
 
 #include <iostream>
+#include <sstream>
 #include <string>
+#include <ctime>
+#include <cstdlib>
 #include "ActivoRenta.h"
 #include "Tablero.h"
+#include "Historial.h"
+
 
 using namespace std;
 
 int idHistorialActivos;
 
 Tablero* tablero = new Tablero();
-ActivosRenta rentas;
+Historial* transacciones = new Historial();
+
+
 
 void Mostrar(int& d, int FE)
 {
@@ -26,7 +33,7 @@ void logIn();
 void registrarUsuario();
 void activosUser() {};
 void rentasCsuario();
-
+void activosDeUsuario() {}; // Grafica de arbol despues de buscar en matriz
 
 
 void ordenarTransac() {};
@@ -45,8 +52,8 @@ void menuAdministrador() {
 		cout << "3. Reportes de un departamento" << endl;
 		cout << "4. Reportes de una empresa" << endl;
 		cout << "5. Reporte transacciones" << endl;
-		cout << "6. Activos de un usuario" << endl;
-		cout << "7. Activos rentados por un usuario" << endl;
+		cout << "6. Reporte Activos de un usuario" << endl;
+		cout << "7. Reporte Activos rentados por un usuario" << endl;
 		cout << "8. Ordenar transacciones" << endl;
 		cout << "9. Salir de modo admin." << endl;
 
@@ -70,7 +77,7 @@ void menuAdministrador() {
 				cagadales
 			*/
 			break;
-		case 5:
+		case 4:
 			//Crear metodo para sacar los metodos de cada empresa
 						//tablero->graficasEmpresa();
 			/*
@@ -79,7 +86,11 @@ void menuAdministrador() {
 				cagadales
 			*/
 			break;
+		case 5: 
+			//transacciones->graficar(); Lo voy a poner aca hasta que este listo
+			break;
 		case 6:
+			activosDeUsuario();
 			break;
 		case 7:
 			rentasCsuario();
@@ -118,17 +129,11 @@ void registrarUsuario() {
 	cin.getline((char*)empresa.c_str(), 100, '\n');
 	cin.ignore();
 
-	tablero->insertarElemento(userName, contrasea, nombreCompleto, ActivosRenta(), departamento, empresa);
+	tablero->insertarElemento(userName, contrasea, nombreCompleto, ActivosRenta(), empresa, departamento);
 }
 void rentasCsuario() {
 	//Usuario a buscar 
-	string userUsuario;
-	cin.getline((char*)userUsuario.c_str(), 100, '\n');
-	cin.ignore();
 
-	NodoTablero* usuario = tablero->buscarNodo(userUsuario);
-
-	//Llamar a metodo de graficar arbol de usuario
 
 }
 
@@ -138,9 +143,9 @@ void rentasCsuario() {
 void agregarA(ActivosRenta);
 void eliminarActivo(ActivosRenta);
 void modificarActivo(ActivosRenta);
-void rentarActivo(ActivosRenta) {};
-void activosRentados() {};
-void misActivosRentados(ActivosRenta) {};
+void rentarActivo(ActivosRenta, NodoTablero*);
+void activosRentados(ActivosRenta);
+void misActivosRentados(ActivosRenta);
 
 void menuUsuario(NodoTablero* usuario) {
 	int opcion = 0;
@@ -173,10 +178,10 @@ void menuUsuario(NodoTablero* usuario) {
 			modificarActivo(usuario->empleado->getRentas());
 			break;
 		case 4:
-			rentarActivo(usuario->empleado->getRentas());
+			rentarActivo(usuario->empleado->getRentas(),usuario);
 			break;
 		case 5:
-			activosRentados();
+			activosRentados(usuario->empleado->getRentas());
 			break;
 		case 6:
 			//Hacer recorrido de mis activos rentados(por usuario)
@@ -253,7 +258,7 @@ void modificarActivo(ActivosRenta arbolUsuario) {
 		if (activo->disponibilidad == true) {
 			cout << "entr" << endl;
 			string gfd, descripcion;
-		
+
 			cout << "Cambiar nombre activo: " << endl;
 			cin >> gfd;
 			cout << "Agregar nueva descripcion: " << endl;
@@ -274,12 +279,86 @@ void modificarActivo(ActivosRenta arbolUsuario) {
 	}
 }
 
+void rentarActivo(ActivosRenta arbolUsuario, NodoTablero* infoUsuario) {
+	cout << "----------------------------Catalogo de activos ----------------------------" << endl;
+	arbolUsuario.libres();
+
+	cout << endl << endl;
+	int opcion;
+	cout << "1. Rentar activo." << endl;
+	cout << "2. Regresar a menu principal." << endl;
+	cout << "Ingrese opcion";
+	cin >> opcion;
+	cout << endl << endl;	
+	if (opcion == 1) {
+		int activo_abuscar;
+		cout << "Bienvenido a las reservaciones." << endl;
+		string nombreActivo, fecha, tiempo;
+		cout << endl << "Ingresa el id del activo a reservar." << endl;
+		cin >> activo_abuscar;
+		
+	
+		if (arbolUsuario.buscar(activo_abuscar) == true) {
+			//Solo admite que utilices activos que estan disponibles
+			string alfaNumerico = "";
+			nombreActivo = arbolUsuario.buscarActivo(activo_abuscar)->nombreActivo;
+			fecha = "d";
+			cout << "Ingresa el tiempo que tendra la propiedad en alquiler." << endl;
+			cin >> tiempo;
+			arbolUsuario.buscarActivo(activo_abuscar)->disponibilidad = false;
+			transacciones->insertar(alfaNumerico, activo_abuscar, nombreActivo, infoUsuario, fecha, tiempo);
+		}
+		else {
+			cout << "El activo no esta en el catalogo en este momento." << endl;
+		}
+
+	}
+	else {
+		cout << "Vete sin tu renta peus :(" << endl;
+	}
+}
+
+void activosRentados(ActivosRenta arbolUsuario) {
+	cout << "----------------------------Activos Rentados----------------------------" << endl;
+	arbolUsuario.reservados();
+	cout << endl << "1. Devolver activo" << endl;
+	cout << "2. Regresar a menu usuario" << endl;
+	int opcion;
+	cin >> opcion;
+	if (opcion == 1) {
+		//Devolver activo
+		opcion = 0;
+		cout << "Ingrese el id del activo a devolver" << endl;
+		cin >> opcion;
+		if (arbolUsuario.buscar(opcion) == true) {
+			if (arbolUsuario.buscarActivo(opcion)->disponibilidad == false) {
+				arbolUsuario.buscarActivo(opcion)->disponibilidad = true;
+				cout << "Devolucion concretada." << endl;
+			}
+			else {
+				cout << "El activo no esta alquilado, no lo puedes devolver." << endl;
+			}
+		}
+		else {
+			cout << "El activo que buscas no existe" << endl;
+		}
+	}
+	else {
+		cout << "Hasta la proxima" << endl;
+	}
+}
+
+void misActivosRentados(ActivosRenta arbolUsuario) {
+	cout << "----------------------------Mis Activos Rentados----------------------------" << endl;
+	arbolUsuario.reservados();
+	cout << endl;
+}
 
 
 int main()
 {
-	string palabra1 = "allain";
-	string palabra2 = "allaan";
+	string palabra1 = "a5B3";
+	string palabra2 = "a5B2";
 
 	if (palabra1 < palabra2) {
 		cout << "Correcto" << endl;
@@ -287,6 +366,9 @@ int main()
 	else {
 		cout << "Hm" << endl;
 	}
+	Tablero* tablero = new Tablero();
+
+	
 
 	ActivosRenta arbol;
 
@@ -301,10 +383,34 @@ int main()
 	arbol.insertar("Ml", 15, "", true);
 
 
-	modificarActivo(arbol);
+	tablero->insertarElemento("Mynor", "Mynor", "fd", arbol, "max", "guatemala");
+	tablero->insertarElemento("susan", "asd", "fd", arbol, "hp", "jutiapa");
+	tablero->insertarElemento("sucel", "asd", "fd", arbol, "hp", "jalapa");
+	tablero->insertarElemento("roxana", "asd", "fd", arbol, "walmart", "jalapa");
+	tablero->insertarElemento("andrea", "Mynor", "fd", arbol, "walmart", "jalapa");
+	tablero->insertarElemento("sebas", "asd", "fd", arbol, "walmart", "jalapa");
+	tablero->insertarElemento("andres", "asd", "fd", arbol, "hp", "guatemala");
+	tablero->insertarElemento("willy", "asd", "fd", arbol, "max", "jalapa");
+	tablero->insertarElemento("Mynor", "asd", "fd", arbol, "walmart", "guatemala");
+	tablero->insertarElemento("Albrto", "alb", "fd", arbol, "max", "guatemala");
+	tablero->recorrerTablero();
 
-	arbol.preOrden();
+	//registrarUsuario();
+	tablero->graficar();
 
+
+	/*
+	miObjeto->insertarElemento("mynor", 1, "max", "Guatemala");
+	miObjeto->insertarElemento("susan", 2, "hp", "jutiapa");
+	miObjeto->insertarElemento("susel", 3, "hp", "jalapa");
+	miObjeto->insertarElemento("roxana", 4, "walmart", "jalapa");
+	miObjeto->insertarElemento("andrea", 5, "walmart", "jalapa");
+	miObjeto->insertarElemento("sebas", 6, "walmart", "jalapa");
+	miObjeto->insertarElemento("andres", 7, "hp", "Guatemala");
+	miObjeto->insertarElemento("willy", 8, "max", "jalapa");
+	miObjeto->insertarElemento("mynor", 6, "walmart", "Guatemala");
+	*/
+	
 
 
 	//arbol.recor();
@@ -315,12 +421,7 @@ int main()
 
 
 	/*
-	Tablero* tablero = new Tablero();
-
-	tablero->insertarElemento("Mynor", "Mynor", "fd", arbol, "Guate", "max");
-	tablero->insertarElemento("Diana", "asd", "fd", arbol, "Jalapa", "Qla");
-	tablero->insertarElemento("Estuardo", "asd", "fd", arbol, "Jutipa", "PFA");
-	tablero->insertarElemento("Paola", "asd", "fd", arbol, "Solola", "UPS");
+	
 	*/
 	//tablero->recorrerTablero();
 	//tablero->graficar();
