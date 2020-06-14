@@ -1,17 +1,24 @@
 // PPVPS2020.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 //
+#pragma warning(disable : 4996)
 
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <ctime>
-#include <cstdlib>
+#include <time.h>
+
+
+#include <stdio.h>
+#include <stdlib.h>
 #include "ActivoRenta.h"
 #include "Tablero.h"
 #include "Historial.h"
 
+#define _CRT_SECURE_NO_WARNINGS
+
 
 using namespace std;
+
 
 int idHistorialActivos;
 
@@ -27,6 +34,52 @@ void Mostrar(int& d, int FE)
 
 //Area general
 void logIn();
+
+
+
+string getDate()
+{
+	time_t t = time(NULL);
+	tm* timePtr = localtime(&t);
+
+	stringstream ss_year;
+	ss_year << timePtr->tm_year + 1900;
+	string Year = ss_year.str();
+
+	stringstream ss_month;
+	ss_month << timePtr->tm_mon + 1;
+	string Month = ss_month.str();
+	if (atoi(Month.c_str()) < 10)
+		Month = "0" + Month;
+
+	stringstream ss_day;
+	ss_day << timePtr->tm_mday;
+	string Day = ss_day.str();
+	if (atoi(Day.c_str()) < 10)
+		Day = "0" + Day;
+
+	stringstream ss_hour;
+	ss_hour << timePtr->tm_hour;
+	string Hour = ss_hour.str();
+	if (atoi(Hour.c_str()) < 10)
+		Hour = "0" + Hour;
+
+	stringstream ss_min;
+	ss_min << timePtr->tm_min;
+	string Min = ss_min.str();
+	if (atoi(Min.c_str()) < 10)
+		Min = "0" + Min;
+
+	stringstream ss_sec;
+	ss_sec << timePtr->tm_sec;
+	string Sec = ss_sec.str();
+	if (atoi(Sec.c_str()) < 10)
+		Sec = "0" + Sec;
+
+	
+	string Fecha = Day + "/" + Month + "/" + "/" + Year + " -- " + Hour + ":" + Min + ":" + Sec;
+	return Fecha;
+}
 /*__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--*/
 
 //Esto es para el area de administrador
@@ -42,6 +95,7 @@ void ordenarTransac() {};
 void menuAdministrador() {
 	int opcion = 0;
 	bool validador = true;
+
 
 	while (validador) {
 
@@ -86,8 +140,8 @@ void menuAdministrador() {
 				cagadales
 			*/
 			break;
-		case 5: 
-			//transacciones->graficar(); Lo voy a poner aca hasta que este listo
+		case 5:
+			//transacciones->graficar();
 			break;
 		case 6:
 			activosDeUsuario();
@@ -178,7 +232,7 @@ void menuUsuario(NodoTablero* usuario) {
 			modificarActivo(usuario->empleado->getRentas());
 			break;
 		case 4:
-			rentarActivo(usuario->empleado->getRentas(),usuario);
+			rentarActivo(usuario->empleado->getRentas(), usuario);
 			break;
 		case 5:
 			activosRentados(usuario->empleado->getRentas());
@@ -289,20 +343,20 @@ void rentarActivo(ActivosRenta arbolUsuario, NodoTablero* infoUsuario) {
 	cout << "2. Regresar a menu principal." << endl;
 	cout << "Ingrese opcion";
 	cin >> opcion;
-	cout << endl << endl;	
+	cout << endl << endl;
 	if (opcion == 1) {
 		int activo_abuscar;
 		cout << "Bienvenido a las reservaciones." << endl;
 		string nombreActivo, fecha, tiempo;
 		cout << endl << "Ingresa el id del activo a reservar." << endl;
 		cin >> activo_abuscar;
-		
-	
+
+
 		if (arbolUsuario.buscar(activo_abuscar) == true) {
 			//Solo admite que utilices activos que estan disponibles
 			string alfaNumerico = "";
 			nombreActivo = arbolUsuario.buscarActivo(activo_abuscar)->nombreActivo;
-			fecha = "d";
+			fecha = getDate();
 			cout << "Ingresa el tiempo que tendra la propiedad en alquiler." << endl;
 			cin >> tiempo;
 			arbolUsuario.buscarActivo(activo_abuscar)->disponibilidad = false;
@@ -368,7 +422,7 @@ int main()
 	}
 	Tablero* tablero = new Tablero();
 
-	
+
 
 	ActivosRenta arbol;
 
@@ -382,6 +436,7 @@ int main()
 	arbol.insertar("Mk", 17, "", true);
 	arbol.insertar("Ml", 15, "", true);
 
+	//arbol.graficar();
 
 	tablero->insertarElemento("Mynor", "Mynor", "fd", arbol, "max", "guatemala");
 	tablero->insertarElemento("susan", "asd", "fd", arbol, "hp", "jutiapa");
@@ -393,11 +448,31 @@ int main()
 	tablero->insertarElemento("willy", "asd", "fd", arbol, "max", "jalapa");
 	tablero->insertarElemento("Mynor", "asd", "fd", arbol, "walmart", "guatemala");
 	tablero->insertarElemento("Albrto", "alb", "fd", arbol, "max", "guatemala");
+	tablero->insertarElemento("Mario", "alb", "fd", arbol, "hp", "guatemala");
+	tablero->insertarElemento("Alfredo", "asd", "fd", arbol, "max", "jutiapa");
+	
 	tablero->recorrerTablero();
 
 	//registrarUsuario();
-	tablero->graficar();
+	//tablero->graficar();
 
+	NodoTablero* prueba = new NodoTablero("", new DatosEmpleado("MEFM", "asdf", "Estui", arbol, "ss", "qq"));
+
+	cout << endl << "Transacciones" << endl;
+	transacciones->insertar("asfadsfasdf", 9, "1a ", prueba, "sdfsdf", "sdfsdf");
+	transacciones->insertar("arrancala234", 9, "1a ", prueba, "sdfsdf", "sdfsdf");
+	transacciones->insertar("fasf332123", 9, "1a ", prueba, "sdfsdf", "sdfsdf");
+	transacciones->insertar("afasdf232", 1, "2d", new NodoTablero("", new DatosEmpleado("", "", "All Migth", arbol, "", "")), "", "");
+	transacciones->insertar("as234asdf", 3, "3e", new NodoTablero("", new DatosEmpleado("", "", "Deju", arbol, "", "")), "", "");
+	transacciones->insertar("asfadsA3df", 5, "4f", new NodoTablero("", new DatosEmpleado("", "", "Mario", arbol, "", "")), "", "");
+	transacciones->insertar("asfadsfasd354f", 10, "5c", new NodoTablero("", new DatosEmpleado("", "", "Ascari", arbol, "", "")), "", "");
+
+
+	transacciones->recorrer();
+	//transacciones->graficar();
+	//transacciones->graficarXusuario(prueba);
+	tablero->reporteEmpresa("walmart");
+	string a;
 
 	/*
 	miObjeto->insertarElemento("mynor", 1, "max", "Guatemala");
@@ -410,8 +485,8 @@ int main()
 	miObjeto->insertarElemento("willy", 8, "max", "jalapa");
 	miObjeto->insertarElemento("mynor", 6, "walmart", "Guatemala");
 	*/
-	
 
+	
 
 	//arbol.recor();
 
@@ -421,7 +496,7 @@ int main()
 
 
 	/*
-	
+
 	*/
 	//tablero->recorrerTablero();
 	//tablero->graficar();

@@ -2,6 +2,8 @@
 #include <iostream>
 #include<string>
 #include <algorithm>
+#include <fstream>
+
 //ActivoRenta
 
 using namespace std;
@@ -57,7 +59,7 @@ class ActivosRenta {
 private:
 	enum { IZQUIERDO, DERECHO };
 	// Punteros de la lista, para cabeza y nodo actual:
-
+	string controla = "";
 	NodoActivo* raiz;
 	NodoActivo* actual;
 	int contador;
@@ -93,9 +95,12 @@ private:
 
 	void recor(NodoActivo* nodo);
 
+	void arbolIndividual(NodoActivo*);
+
 	void graficar(NodoActivo* nodo);
 	NodoActivo* buscarActivo(NodoActivo* nodo, int id);
 
+	string pasarDocumento(string,NodoActivo*, int,string);
 
 public:
 	// Constructor y destructor básicos:
@@ -119,8 +124,12 @@ public:
 	void inOrden();
 	void preOrden();
 	void postOrden();
-
 	void graficar();
+
+	
+
+	string pasarDocumento(string nombre,int numCluster);
+
 
 
 };

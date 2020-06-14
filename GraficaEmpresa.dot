@@ -1,0 +1,72 @@
+digraph a{
+node[shape = record, style=filled, fillcolor=seashell2];
+compound = true
+                                  subgraph cluster0                                  {
+                                  label = "Usuario";
+                                  Titulo0                                  [label="Mynor"]
+                                  }
+                                  subgraph cluster1                                  {
+                                                                                                      Hol->Mi
+                                  Hol->Gf
+                                  Mi->Lp
+                                  Mi->Qw
+                                  Gf->bf
+                                  Gf->Ml
+                                  Ml->Op
+                                  Ml->Mk
+                                  }
+
+                                  Titulo0                                  -> Hol[ltail=cluster0 lhead=cluster1]
+                                  ;
+                                  subgraph cluster2                                  {
+                                  label = "Usuario";
+                                  Titulo2                                  [label="roxana"]
+                                  }
+                                  subgraph cluster3                                  {
+                                                                                                      Hol->Mi
+                                  Hol->Gf
+                                  Mi->Lp
+                                  Mi->Qw
+                                  Gf->bf
+                                  Gf->Ml
+                                  Ml->Op
+                                  Ml->Mk
+                                  }
+
+                                  Titulo2                                  -> Hol[ltail=cluster2 lhead=cluster3]
+                                  ;
+                                  subgraph cluster4                                  {
+                                  label = "Usuario";
+                                  Titulo4                                  [label="andrea"]
+                                  }
+                                  subgraph cluster5                                  {
+                                                                                                      Hol->Mi
+                                  Hol->Gf
+                                  Mi->Lp
+                                  Mi->Qw
+                                  Gf->bf
+                                  Gf->Ml
+                                  Ml->Op
+                                  Ml->Mk
+                                  }
+
+                                  Titulo4                                  -> Hol[ltail=cluster4 lhead=cluster5]
+                                  ;
+                                  subgraph cluster6                                  {
+                                  label = "Usuario";
+                                  Titulo6                                  [label="sebas"]
+                                  }
+                                  subgraph cluster7                                  {
+                                                                                                      Hol->Mi
+                                  Hol->Gf
+                                  Mi->Lp
+                                  Mi->Qw
+                                  Gf->bf
+                                  Gf->Ml
+                                  Ml->Op
+                                  Ml->Mk
+                                  }
+
+                                  Titulo6                                  -> Hol[ltail=cluster6 lhead=cluster7]
+                                  ;
+}

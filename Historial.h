@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "Tablero.h"
 
 using namespace std;
@@ -23,6 +24,7 @@ public:
 		this->anterior = 0;
 
 		this->codigo = codigo;
+		this->nombreActivo = nombreaActivo;
 		this->usuario = usuario;
 		this->fechaRenta = fecha;
 		this->tiempoRenta = tiempo;
@@ -49,7 +51,7 @@ public:
 	void recorrer();
 	bool verificarExistencia(int id);
 	void graficar();
-	void graficarXusuario(int id);
+	void graficarXusuario(NodoTablero* usuario);
 
 };
 

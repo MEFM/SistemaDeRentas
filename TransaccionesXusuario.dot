@@ -1,0 +1,28 @@
+digraph a{
+rankdir = LR
+node[shape = rectangle]
+compound = true;
+subgraph cluster0{
+Titular[label = "MEFM"]
+label = "Usuario"
+}
+
+
+subgraph cluster1{
+label = "Transacciones"
+X0074C438[label = "Id_Transaccion: arrancala234
+Nombre Activo: 1a 
+Usuario: Estui
+Fecha: sdfsdf"]
+X00742BC0[label = "Id_Transaccion: asfadsfasdf
+Nombre Activo: 1a 
+Usuario: Estui
+Fecha: sdfsdf"]
+X0074C4E8[label = "Id_Transaccion: fasf332123
+Nombre Activo: 1a 
+Usuario: Estui
+Fecha: sdfsdf"]
+}
+
+Titular -> X0074C4E8[ltail=cluster0 lhead=cluster1]
+}

@@ -1,0 +1,12 @@
+digraph reporte{
+node [shape = circle];
+Hol->Mi
+Hol->Gf
+Mi->Lp
+Mi->Qw
+Gf->bf
+Gf->Ml
+Ml->Op
+Ml->Mk
+
+}

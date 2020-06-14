@@ -1,7 +1,7 @@
 #include "Tablero.h"
 
 NodoTablero* Tablero::crearEmpresa(string empresa) {
-	NodoTablero* empre = new NodoTablero(empresa, new DatosEmpleado("", "", "", ActivosRenta(), "", ""));
+	NodoTablero* empre = new NodoTablero(empresa, new DatosEmpleado("E", "E", "E", ActivosRenta(), "E", "E"));
 
 	NodoTablero* auxiliar = this->cabecera;
 
@@ -17,7 +17,7 @@ NodoTablero* Tablero::crearEmpresa(string empresa) {
 
 NodoTablero* Tablero::crearDepartamento(string departamento) {
 	NodoTablero* depart =
-		new NodoTablero(departamento, new DatosEmpleado("", "", "", ActivosRenta(), "", ""));
+		new NodoTablero(departamento, new DatosEmpleado("D", "D", "D", ActivosRenta(), "D", "D"));
 	NodoTablero* auxiliar = this->cabecera;
 
 	while (auxiliar->siguiente != 0) {
@@ -62,8 +62,8 @@ bool Tablero::verificarDepa(string departamento, NodoTablero* inicio, NodoTabler
 	}
 
 	if (auxiliar->nombre == departamento) {
-		while (inicio->anterior != 0) {
-			inicio = inicio->anterior;
+		while (inicio->atras != 0) {
+			inicio = inicio->atras;
 		}
 		inicio->atras = nodoUsuario;
 		nodoUsuario->siguiente = inicio;
@@ -98,7 +98,7 @@ void Tablero::insertarElemento(string usernarme, string contraseña, string nombr
 		new DatosEmpleado(usernarme, contraseña, nombreCompleto, rentas, departamento, empresa));
 	NodoTablero* nodoDepartamento = this->buscarDepa(departamento, cabecera);
 	NodoTablero* nodoEmpresa = this->buscarEmpresa(empresa, cabecera);
-
+	bool insertado = true;
 	if (nodoDepartamento == 0) {
 		nodoDepartamento = crearDepartamento(departamento);
 	}
@@ -121,16 +121,19 @@ void Tablero::insertarElemento(string usernarme, string contraseña, string nombr
 			nUsuario->arriba = auxiliar;
 		}
 	}
+
 	else {
-		//Insertar en medio
 		NodoTablero* auxiliar = nodoDepartamento;
 		do {
 			auxiliar = auxiliar->abajo;
+
 			if (!verificarEmpresa(empresa, auxiliar, nUsuario)) {
 				NodoTablero* auxEmpresa = auxiliar->anterior;
+
 				while (auxEmpresa->anterior != 0) {
 					auxEmpresa = auxEmpresa->anterior;
 				}
+
 				while (auxEmpresa->arriba != 0) {
 					if (auxEmpresa->nombre == empresa) {
 						nUsuario->abajo = auxiliar;
@@ -140,9 +143,14 @@ void Tablero::insertarElemento(string usernarme, string contraseña, string nombr
 						auxiliar->arriba = nUsuario;
 						break;
 					}
+					else if (nUsuario->adelante != 0) {
+						break;
+					}
 					auxEmpresa = auxEmpresa->arriba;
 				}
 			}
+
+
 		} while (auxiliar->abajo != 0 && nUsuario->arriba == 0);
 
 		if (nUsuario->arriba == 0 && nUsuario->adelante == 0) {
@@ -423,13 +431,6 @@ void Tablero::graficar() {
 
 		while (node != 0) {
 			archivo << "N" << idNodo << "[label =" << "\"" << node->nombre << "\" width = 1.5, group =" << grupoColumna(node) << "];" << endl;
-			NodoTablero* nodo3D = node->atras;
-
-			while (nodo3D != 0) {
-				idNodo++;
-				archivo << "N" << idNodo << "[label =" << "\"" << nodo3D->nombre << "\" width = 1.5, group =" << grupoColumna(nodo3D) << "];" << endl;
-				nodo3D = nodo3D->atras;
-			}
 			idNodo++;
 			node = node->siguiente;
 		}
@@ -443,50 +444,7 @@ void Tablero::graficar() {
 	idNodo = 0;
 	int u = 0;
 
-	while (auxiliar != 0) {
-		NodoTablero* node = auxiliar->siguiente;
 
-		while (node != 0) {
-			if (node->anterior->empleado->getUser() == "") {
-				archivo << "U" << u << "-> N" << idNodo << endl;
-				archivo << "N" << idNodo << "->U" << u << endl;
-			}
-			else {
-				if (node->anterior->atras == 0) {
-					archivo << "N" << idNodo << "-> N" << idNodo - 1 << endl;
-					archivo << "N" << idNodo - 1 << "-> N" << idNodo << endl;
-				}
-				else {
-					archivo << "N" << idNodo << "->" << "N" << idNodo - 2 << ";" << endl;
-					archivo << "N" << idNodo - 2 << "->" << "N" << idNodo << ";" << endl;
-				}
-			}
-
-			if (node->arriba->empleado->getUser() == "") {
-				archivo << "A" << idGrupoColumna(node->arriba) << "->" << "N" << idNodo << ";" << endl;
-				archivo << "N" << idNodo << "->" << "A" << idGrupoColumna(node->arriba) << ";" << endl;
-			}
-			else {
-				archivo << "N" << idNodo << "->" << "N" << idGrupoColumna(node->arriba) << ";" << endl;
-				archivo << "N" << idGrupoColumna(node->arriba) << "->" << "N" << idNodo << ";" << endl;
-			}
-
-			NodoTablero* node3D = node->atras;
-			while (node3D != 0) //----- VERIFICAR 3D ----
-			{
-				idNodo++;
-				archivo << "N" << idNodo << "->" << "N" << idNodo - 1 << ";" << endl;
-				archivo << "N" << idNodo - 1 << "->" << "N" << idNodo << ";" << endl;
-				node3D = node3D->adelante;
-			}
-
-			idNodo++;
-			node = node->siguiente;
-		}
-		u++;
-		auxiliar = auxiliar->abajo;
-
-	}
 
 
 	archivo << endl;
@@ -502,13 +460,6 @@ void Tablero::graficar() {
 		{
 			archivo << "N" << idNodo << ";";
 
-			NodoTablero* node3D = node->adelante;
-			while (node3D != 0) //----- VERIFICAR 3D ----
-			{
-				idNodo++;
-				node3D = node3D->adelante;
-			}
-
 			idNodo++;
 			node = node->siguiente;
 		}
@@ -520,4 +471,48 @@ void Tablero::graficar() {
 
 	archivo << "}" << endl;
 	archivo.close();
+}
+
+void Tablero::reporteEmpresa(string empresa) {
+
+	NodoTablero* auxiliar = this->cabecera->siguiente;
+	ofstream archivo("GraficaEmpresa.dot");
+
+	archivo << "digraph a{" << endl;
+	archivo << "node[shape = record, style=filled, fillcolor=seashell2];" << endl;
+	archivo << "compound = true" << endl;
+	int contadorCluster = 0;
+	while (auxiliar != 0) {
+		if (auxiliar->nombre == empresa) {
+			NodoTablero* auxiliar2 = auxiliar->abajo;
+
+			while (auxiliar2 != 0) {
+
+				if (auxiliar2->atras != 0) {
+					NodoTablero* auxiliar3 = auxiliar2;
+					while (auxiliar3 != 0) {
+						archivo << auxiliar3->empleado->getRentas().pasarDocumento(auxiliar3->nombre, contadorCluster);
+					
+						contadorCluster = contadorCluster + 2;
+						auxiliar3 = auxiliar3->atras;
+					}
+				}
+				else {
+					cout << auxiliar2->nombre << endl;
+					archivo << auxiliar2->empleado->getRentas().pasarDocumento(auxiliar2->nombre, contadorCluster);
+				}
+
+				contadorCluster = contadorCluster + 2;
+				auxiliar2 = auxiliar2->abajo;
+			}
+
+		}
+		auxiliar = auxiliar->siguiente;
+	}
+
+	archivo << "}" << endl;
+	archivo.close();
+
+
+
 }

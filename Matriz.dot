@@ -1,10 +1,10 @@
 digraph a{
 node[shape=box];
-C014B6570[ label = "Matrix", width = 1.5, style = filled, fillcolor = firebrick1, group = 1 ];
+C00736570[ label = "Matrix", width = 1.5, style = filled, fillcolor = firebrick1, group = 1 ];
 U0 [label = "guatemala"    pos = "5.3, 3.5!" width = 1.5 style = filled, fillcolor = bisque1, group = 1 ];
 U1 [label = "jutiapa"    pos = "5.3, 3.5!" width = 1.5 style = filled, fillcolor = bisque1, group = 1 ];
 U2 [label = "jalapa"    pos = "5.3, 3.5!" width = 1.5 style = filled, fillcolor = bisque1, group = 1 ];
-C014B6570->U0
+C00736570->U0
 U0-> U1
 U1-> U0
 U1-> U2
@@ -16,7 +16,7 @@ U3-> U2
 A0 [label = max   width = 1.5 style = filled, fillcolor = lightskyblue, group = 2 ];
 A1 [label = hp   width = 1.5 style = filled, fillcolor = lightskyblue, group = 3 ];
 A2 [label = walmart   width = 1.5 style = filled, fillcolor = lightskyblue, group = 4 ];
-C014B6570->A0
+C00736570->A0
 A0-> A1
 A1-> A0
 A1-> A2
@@ -24,7 +24,7 @@ A2-> A1
 A2-> A3
 A3-> A2
 {rank = same;
-C014B6570;
+C00736570;
 A0;
 A1;
 A2;
@@ -32,54 +32,16 @@ A2;
 
 
 N0[label ="Mynor" width = 1.5, group =0];
-N1[label ="Albrto" width = 1.5, group =0];
-N2[label ="andres" width = 1.5, group =0];
-N3[label ="Mynor" width = 1.5, group =0];
+N1[label ="andres" width = 1.5, group =0];
+N2[label ="Mynor" width = 1.5, group =0];
+N3[label ="Alfredo" width = 1.5, group =0];
 N4[label ="susan" width = 1.5, group =0];
 N5[label ="willy" width = 1.5, group =0];
 N6[label ="sucel" width = 1.5, group =0];
 N7[label ="roxana" width = 1.5, group =0];
-N8[label ="andrea" width = 1.5, group =0];
-N9[label ="sebas" width = 1.5, group =0];
 
-U0-> N0
-N0->U0
-A0->N0;
-N0->A0;
-N1->N0;
-N0->N1;
-N2->N1;
-N1->N2;
-N3->N1;
-N1->N3;
-A1->N3;
-N3->A1;
-N4-> N3
-N3-> N4
-A2->N4;
-N4->A2;
-U1-> N5
-N5->U1
-N5->N0;
-N0->N5;
-U2-> N6
-N6->U2
-N6->N0;
-N0->N6;
-N7-> N6
-N6-> N7
-N7->N0;
-N0->N7;
-N8-> N7
-N7-> N8
-N8->N0;
-N0->N8;
-N9->N8;
-N8->N9;
-N10->N9;
-N9->N10;
 
 {rank = same;U0;N0;N1;N2;}
-{rank = same;U1;N3;}
-{rank = same;U2;N4;N5;N6;}
+{rank = same;U1;N3;N4;}
+{rank = same;U2;N5;N6;N7;}
 }

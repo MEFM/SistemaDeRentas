@@ -469,3 +469,113 @@ void ActivosRenta::libres(NodoActivo* nodo) {
 		libres(nodo->derecho);
 	}
 }
+
+void ActivosRenta::graficar() {
+	if (this->raiz != 0) {
+		controla = "";
+		graficar(this->raiz);
+
+		system("dot -Tpng Activos.dot -o Activos.png");
+		system("Activos.png");
+		controla = "";
+	}
+}
+
+void ActivosRenta::graficar(NodoActivo* nodo) {
+	if (nodo == 0) {
+		return;
+	}
+	else {
+		ofstream WriteFile("Activos.dot");
+		WriteFile << "digraph reporte{" << endl;
+		WriteFile << "node [shape = record, style=filled, fillcolor=seashell2];" << endl;
+
+
+		if (nodo->izquierdo != 0) {
+			//WriteFile << nodo->nombreActivo << "->" << nodo->izquierdo->nombreActivo << endl;
+			controla += nodo->nombreActivo + "->" + nodo->izquierdo->nombreActivo + "\n";
+		}
+		else {
+			this->graficar(nodo->izquierdo);
+			this->graficar(nodo->derecho);
+		}
+
+		if (nodo->derecho != 0) {
+			controla += nodo->nombreActivo + "->" + nodo->derecho->nombreActivo + "\n";
+
+		}
+		else {
+			this->graficar(nodo->izquierdo);
+			this->graficar(nodo->derecho);
+		}
+		this->graficar(nodo->izquierdo);
+		this->graficar(nodo->derecho);
+		//	controla += nodo->nombreActivo + "->" + nodo->izquierdo->nombreActivo + "\n";
+			//controla += nodo->nombreActivo + "->" + nodo->derecho->nombreActivo + "\n";
+
+		WriteFile << controla << endl;
+		WriteFile << "}" << endl;
+		WriteFile.close();
+		//controla = "";
+	}
+}
+
+string ActivosRenta::pasarDocumento(string nombre, int numCluster) {
+	if (this->raiz == 0) {
+		cout << "No hay activos." << endl;
+		return "";
+	}
+	else {
+		return	pasarDocumento(nombre, this->raiz, numCluster, controla);
+	}
+}
+
+string activado = "";
+
+string ActivosRenta::pasarDocumento(string nombre, NodoActivo* nodo, int numCluster, string archivo) {
+	if (nodo != 0) {
+		archivo += "                                  subgraph cluster" + to_string(numCluster);
+		archivo += "                                  {\n";
+		archivo += "                                  label = \"Usuario\";\n";
+		archivo += "                                  Titulo" + to_string(numCluster);
+		archivo += "                                  [label=\"" + nombre + "\"]\n";
+		archivo += "                                  }\n";
+
+		archivo += "                                  subgraph cluster" + to_string(numCluster + 1);
+		archivo += "                                  {\n";
+		activado = "                                  ";
+		arbolIndividual(this->raiz);
+		archivo += "                                  " + activado;
+		archivo += "                                  }\n";
+
+		archivo += "\n";
+		archivo += "                                  Titulo" + to_string(numCluster);
+		archivo += "                                  -> " + nodo->nombreActivo + "[ltail=cluster" + to_string(numCluster);
+		archivo += " lhead=cluster" + to_string(numCluster + 1);
+		archivo += "]\n";
+		archivo += "                                  ;\n";
+		//cout << archivo << endl;
+	}
+	return archivo;
+
+}
+
+void ActivosRenta::arbolIndividual(NodoActivo* nodo) {
+	if (nodo != 0) {
+		if (nodo->izquierdo != 0) {
+			activado += "                                  ";
+			activado += nodo->nombreActivo + "->" + nodo->izquierdo->nombreActivo + "\n";
+			cout << nodo->nombreActivo << endl;
+		}
+		if (nodo->derecho != 0) {
+			activado += "                                  ";
+			activado += nodo->nombreActivo + "->" + nodo->derecho->nombreActivo + "\n";
+			cout << nodo->nombreActivo << endl;
+		}
+
+		this->arbolIndividual(nodo->izquierdo);
+		this->arbolIndividual(nodo->derecho);
+
+	}
+
+}

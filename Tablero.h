@@ -142,8 +142,8 @@ public:
 	void recorrerTablero();
 	void graficar();
 
+	void reporteEmpresa(string empresa);
 	
-	
-
+	void graficaEmpresa(NodoTablero*);
 };
 
