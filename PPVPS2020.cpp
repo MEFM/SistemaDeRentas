@@ -509,6 +509,7 @@ int main()
 	//transacciones->graficar();
 	//transacciones->graficarXusuario(prueba);
 	tablero->reporteEmpresa("walmart");
+	tablero->reporteDepartamento("guatemala");
 	string a;
 
 	/*

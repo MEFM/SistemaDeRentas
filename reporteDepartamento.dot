@@ -1,0 +1,89 @@
+digraph a{
+node[shape = record, style=filled, fillcolor=seashell2];
+compound = true
+                                  subgraph cluster0                                  {
+                                  label = "Usuario";
+                                  Titulo0                                  [label="Mynor"]
+                                  }
+                                  subgraph cluster1                                  {
+                                  label ="Activos"                                                                                                      Hol->Mi
+                                  Hol->Gf
+                                  Mi->Lp
+                                  Mi->Qw
+                                  Gf->bf
+                                  Gf->Ml
+                                  Ml->Op
+                                  Ml->Mk
+                                  }
+
+                                  Titulo0                                  -> Hol[ltail=cluster0 lhead=cluster1]
+                                  ;
+                                  subgraph cluster2                                  {
+                                  label = "Usuario";
+                                  Titulo2                                  [label="Albrto"]
+                                  }
+                                  subgraph cluster3                                  {
+                                  label ="Activos"                                                                                                      Hol->Mi
+                                  Hol->Gf
+                                  Mi->Lp
+                                  Mi->Qw
+                                  Gf->bf
+                                  Gf->Ml
+                                  Ml->Op
+                                  Ml->Mk
+                                  }
+
+                                  Titulo2                                  -> Hol[ltail=cluster2 lhead=cluster3]
+                                  ;
+                                  subgraph cluster6                                  {
+                                  label = "Usuario";
+                                  Titulo6                                  [label="andres"]
+                                  }
+                                  subgraph cluster7                                  {
+                                  label ="Activos"                                                                                                      Hol->Mi
+                                  Hol->Gf
+                                  Mi->Lp
+                                  Mi->Qw
+                                  Gf->bf
+                                  Gf->Ml
+                                  Ml->Op
+                                  Ml->Mk
+                                  }
+
+                                  Titulo6                                  -> Hol[ltail=cluster6 lhead=cluster7]
+                                  ;
+                                  subgraph cluster8                                  {
+                                  label = "Usuario";
+                                  Titulo8                                  [label="Mario"]
+                                  }
+                                  subgraph cluster9                                  {
+                                  label ="Activos"                                                                                                      Hol->Mi
+                                  Hol->Gf
+                                  Mi->Lp
+                                  Mi->Qw
+                                  Gf->bf
+                                  Gf->Ml
+                                  Ml->Op
+                                  Ml->Mk
+                                  }
+
+                                  Titulo8                                  -> Hol[ltail=cluster8 lhead=cluster9]
+                                  ;
+                                  subgraph cluster12                                  {
+                                  label = "Usuario";
+                                  Titulo12                                  [label="Mynor"]
+                                  }
+                                  subgraph cluster13                                  {
+                                  label ="Activos"                                                                                                      c19s->c20sw
+                                  c19s->c24f
+                                  c20sw->c22L
+                                  c20sw->c23w
+                                  c24f->c25m
+                                  c24f->c27kiki
+                                  c27kiki->c21dddd
+                                  c27kiki->c26mio
+                                  }
+
+                                  Titulo12                                  -> c19s[ltail=cluster12 lhead=cluster13]
+                                  ;
+}

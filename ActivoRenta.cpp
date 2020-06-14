@@ -522,7 +522,7 @@ void ActivosRenta::graficar(NodoActivo* nodo) {
 
 string ActivosRenta::pasarDocumento(string nombre, int numCluster) {
 	if (this->raiz == 0) {
-		cout << "No hay activos." << endl;
+		cout << "No hay activos. " << nombre << endl;
 		return "";
 	}
 	else {

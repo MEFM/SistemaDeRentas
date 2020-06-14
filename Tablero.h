@@ -143,7 +143,7 @@ public:
 	void graficar();
 
 	void reporteEmpresa(string empresa);
-	
-	void graficaEmpresa(NodoTablero*);
+	void reporteDepartamento(string departamento);
+
 };
 

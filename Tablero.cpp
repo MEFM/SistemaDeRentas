@@ -479,9 +479,11 @@ void Tablero::reporteEmpresa(string empresa) {
 	ofstream archivo("GraficaEmpresa.dot");
 
 	archivo << "digraph a{" << endl;
+
 	archivo << "node[shape = record, style=filled, fillcolor=seashell2];" << endl;
 	archivo << "compound = true" << endl;
 	int contadorCluster = 0;
+
 	while (auxiliar != 0) {
 		if (auxiliar->nombre == empresa) {
 			NodoTablero* auxiliar2 = auxiliar->abajo;
@@ -492,7 +494,7 @@ void Tablero::reporteEmpresa(string empresa) {
 					NodoTablero* auxiliar3 = auxiliar2;
 					while (auxiliar3 != 0) {
 						archivo << auxiliar3->empleado->getRentas().pasarDocumento(auxiliar3->nombre, contadorCluster);
-					
+
 						contadorCluster = contadorCluster + 2;
 						auxiliar3 = auxiliar3->atras;
 					}
@@ -515,6 +517,54 @@ void Tablero::reporteEmpresa(string empresa) {
 
 	system("dot -Tpng GraficaEmpresa.dot -o GraficaEmpresa.png");
 	system("GraficaEmpresa.png");
+
+
+}
+
+void Tablero::reporteDepartamento(string departamento) {
+	NodoTablero* auxiliar = this->cabecera->abajo;
+
+	ofstream archivo("reporteDepartamento.dot");
+	archivo << "digraph a{" << endl;
+
+	archivo << "node[shape = record, style=filled, fillcolor=seashell2];" << endl;
+	archivo << "compound = true" << endl;
+	int contadorCluster = 0;
+
+	while (auxiliar != 0) {
+
+		if (auxiliar->nombre == departamento) {
+			NodoTablero* auxiliar2 = auxiliar->siguiente;
+
+			while (auxiliar2 != 0) {
+				if (auxiliar2->atras != 0) {
+					NodoTablero* auxiliar3 = auxiliar2;
+
+					while (auxiliar3 != 0) {
+						archivo << auxiliar3->empleado->getRentas().pasarDocumento(auxiliar3->nombre, contadorCluster);
+
+						contadorCluster = contadorCluster + 2;
+						auxiliar3 = auxiliar3->atras;
+					}
+				}
+				else {
+					archivo << auxiliar2->empleado->getRentas().pasarDocumento(auxiliar2->nombre, contadorCluster);
+				}
+
+				contadorCluster = contadorCluster + 2;
+				auxiliar2 = auxiliar2->siguiente;
+			}
+
+		}
+
+
+		auxiliar = auxiliar->abajo;
+	}
+	archivo << "}" << endl;
+	archivo.close();
+
+	system("dot -Tpng reporteDepartamento.dot -o reporteDepartamento.png");
+	system("reporteDepartamento.png");
 
 
 }
