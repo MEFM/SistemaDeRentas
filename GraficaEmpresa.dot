@@ -6,24 +6,24 @@ compound = true
                                   Titulo0                                  [label="Mynor"]
                                   }
                                   subgraph cluster1                                  {
-                                                                                                      Hol->Mi
-                                  Hol->Gf
-                                  Mi->Lp
-                                  Mi->Qw
-                                  Gf->bf
-                                  Gf->Ml
-                                  Ml->Op
-                                  Ml->Mk
+                                  label ="Activos"                                                                                                      c19s->c20sw
+                                  c19s->c24f
+                                  c20sw->c22L
+                                  c20sw->c23w
+                                  c24f->c25m
+                                  c24f->c27kiki
+                                  c27kiki->c21dddd
+                                  c27kiki->c26mio
                                   }
 
-                                  Titulo0                                  -> Hol[ltail=cluster0 lhead=cluster1]
+                                  Titulo0                                  -> c19s[ltail=cluster0 lhead=cluster1]
                                   ;
                                   subgraph cluster2                                  {
                                   label = "Usuario";
                                   Titulo2                                  [label="roxana"]
                                   }
                                   subgraph cluster3                                  {
-                                                                                                      Hol->Mi
+                                  label ="Activos"                                                                                                      Hol->Mi
                                   Hol->Gf
                                   Mi->Lp
                                   Mi->Qw
@@ -40,33 +40,33 @@ compound = true
                                   Titulo4                                  [label="andrea"]
                                   }
                                   subgraph cluster5                                  {
-                                                                                                      Hol->Mi
-                                  Hol->Gf
-                                  Mi->Lp
-                                  Mi->Qw
-                                  Gf->bf
-                                  Gf->Ml
-                                  Ml->Op
-                                  Ml->Mk
+                                  label ="Activos"                                                                                                      a1->a2w
+                                  a1->a6
+                                  a2w->a4
+                                  a2w->a5
+                                  a6->a7
+                                  a6->a9
+                                  a9->a3ddd
+                                  a9->a8
                                   }
 
-                                  Titulo4                                  -> Hol[ltail=cluster4 lhead=cluster5]
+                                  Titulo4                                  -> a1[ltail=cluster4 lhead=cluster5]
                                   ;
                                   subgraph cluster6                                  {
                                   label = "Usuario";
                                   Titulo6                                  [label="sebas"]
                                   }
                                   subgraph cluster7                                  {
-                                                                                                      Hol->Mi
-                                  Hol->Gf
-                                  Mi->Lp
-                                  Mi->Qw
-                                  Gf->bf
-                                  Gf->Ml
-                                  Ml->Op
-                                  Ml->Mk
+                                  label ="Activos"                                                                                                      b10->b11sw
+                                  b10->b15f
+                                  b11sw->b13L
+                                  b11sw->b14w
+                                  b15f->b16m
+                                  b15f->b18kiki
+                                  b18kiki->b12dddd
+                                  b18kiki->b17mio
                                   }
 
-                                  Titulo6                                  -> Hol[ltail=cluster6 lhead=cluster7]
+                                  Titulo6                                  -> b10[ltail=cluster6 lhead=cluster7]
                                   ;
 }

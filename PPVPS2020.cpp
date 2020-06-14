@@ -436,17 +436,54 @@ int main()
 	arbol.insertar("Mk", 17, "", true);
 	arbol.insertar("Ml", 15, "", true);
 
+	ActivosRenta arbol2;
+
+	arbol2.insertar("a1", 10, "", true);
+	arbol2.insertar("a2w", 5, "", false);
+	arbol2.insertar("a3ddd", 13, "", true);
+	arbol2.insertar("a4", 1, "", false);
+	arbol2.insertar("a5", 6, "", false);
+	arbol2.insertar("a6", 12, "", true);
+	arbol2.insertar("a7", 11, "", false);
+	arbol2.insertar("a8", 17, "", true);
+	arbol2.insertar("a9", 15, "", true);
+	
+
+	ActivosRenta arbol3;
+
+	arbol3.insertar("b10", 10, "", true);
+	arbol3.insertar("b11sw", 5, "", false);
+	arbol3.insertar("b12dddd", 13, "", true);
+	arbol3.insertar("b13L", 1, "", false);
+	arbol3.insertar("b14w", 6, "", false);
+	arbol3.insertar("b15f", 12, "", true);
+	arbol3.insertar("b16m", 11, "", false);
+	arbol3.insertar("b17mio", 17, "", true);
+	arbol3.insertar("b18kiki", 15, "", true);
+
+	ActivosRenta arbol4;
+
+	arbol4.insertar("c19s", 10, "", true);
+	arbol4.insertar("c20sw", 5, "", false);
+	arbol4.insertar("c21dddd", 13, "", true);
+	arbol4.insertar("c22L", 1, "", false);
+	arbol4.insertar("c23w", 6, "", false);
+	arbol4.insertar("c24f", 12, "", true);
+	arbol4.insertar("c25m", 11, "", false);
+	arbol4.insertar("c26mio", 17, "", true);
+	arbol4.insertar("c27kiki", 15, "", true);
+
 	//arbol.graficar();
 
 	tablero->insertarElemento("Mynor", "Mynor", "fd", arbol, "max", "guatemala");
 	tablero->insertarElemento("susan", "asd", "fd", arbol, "hp", "jutiapa");
 	tablero->insertarElemento("sucel", "asd", "fd", arbol, "hp", "jalapa");
 	tablero->insertarElemento("roxana", "asd", "fd", arbol, "walmart", "jalapa");
-	tablero->insertarElemento("andrea", "Mynor", "fd", arbol, "walmart", "jalapa");
-	tablero->insertarElemento("sebas", "asd", "fd", arbol, "walmart", "jalapa");
+	tablero->insertarElemento("andrea", "Mynor", "fd", arbol2, "walmart", "jalapa");
+	tablero->insertarElemento("sebas", "asd", "fd", arbol3, "walmart", "jalapa");
 	tablero->insertarElemento("andres", "asd", "fd", arbol, "hp", "guatemala");
 	tablero->insertarElemento("willy", "asd", "fd", arbol, "max", "jalapa");
-	tablero->insertarElemento("Mynor", "asd", "fd", arbol, "walmart", "guatemala");
+	tablero->insertarElemento("Mynor", "asd", "fd", arbol4, "walmart", "guatemala");
 	tablero->insertarElemento("Albrto", "alb", "fd", arbol, "max", "guatemala");
 	tablero->insertarElemento("Mario", "alb", "fd", arbol, "hp", "guatemala");
 	tablero->insertarElemento("Alfredo", "asd", "fd", arbol, "max", "jutiapa");

@@ -513,6 +513,8 @@ void Tablero::reporteEmpresa(string empresa) {
 	archivo << "}" << endl;
 	archivo.close();
 
+	system("dot -Tpng GraficaEmpresa.dot -o GraficaEmpresa.png");
+	system("GraficaEmpresa.png");
 
 
 }

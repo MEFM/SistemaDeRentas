@@ -543,6 +543,7 @@ string ActivosRenta::pasarDocumento(string nombre, NodoActivo* nodo, int numClus
 
 		archivo += "                                  subgraph cluster" + to_string(numCluster + 1);
 		archivo += "                                  {\n";
+		archivo += "                                  label =\"Activos\"";
 		activado = "                                  ";
 		arbolIndividual(this->raiz);
 		archivo += "                                  " + activado;
@@ -562,6 +563,8 @@ string ActivosRenta::pasarDocumento(string nombre, NodoActivo* nodo, int numClus
 
 void ActivosRenta::arbolIndividual(NodoActivo* nodo) {
 	if (nodo != 0) {
+
+
 		if (nodo->izquierdo != 0) {
 			activado += "                                  ";
 			activado += nodo->nombreActivo + "->" + nodo->izquierdo->nombreActivo + "\n";
