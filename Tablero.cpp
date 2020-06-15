@@ -471,6 +471,9 @@ void Tablero::graficar() {
 
 	archivo << "}" << endl;
 	archivo.close();
+
+	system("dot -Tpng Matriz.dot -o Matriz.png");
+	system("Matriz.png");
 }
 
 void Tablero::reporteEmpresa(string empresa) {

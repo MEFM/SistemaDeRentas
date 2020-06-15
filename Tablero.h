@@ -62,7 +62,7 @@ public:
 	string getNombre() {
 		return nombreCompleto;
 	}
-	string getContraseña() {
+	string getContrasenia() {
 		return contraseña;
 	}
 	string getUser() {

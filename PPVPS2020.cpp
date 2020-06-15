@@ -25,7 +25,8 @@ int idHistorialActivos;
 Tablero* tablero = new Tablero();
 Historial* transacciones = new Historial();
 
-
+void menuUsuario(NodoTablero*);
+void menuAdministrador();
 
 void Mostrar(int& d, int FE)
 {
@@ -33,7 +34,78 @@ void Mostrar(int& d, int FE)
 }
 
 //Area general
-void logIn();
+void logIn() {
+
+	string nombre, contrasenia, departamento, empresa;
+
+	bool validador = true;
+	int option = 0;
+
+	while (validador) {
+
+		cout << "--------------------------PROYECTO RENTA ACTIVOS--------------------------" << endl;
+
+		cout << "1. INGRESAR COMO ADMINISTRADOR" << endl;
+		cout << "2. INGRESAR COMO TRABAJADO." << endl;
+		cout << "3. SALIR." << endl;
+
+		cout << endl << "Ingrese una opcion: ";
+		cin >> option;
+
+		switch (option)
+		{
+		case 1:
+			cout << endl << endl;
+			cout << "Administrador." << endl<<endl;
+			cout << "Ingrese name del administrador" << endl;
+			cin >> nombre;
+			cout << "Ingrese contraseña del administrador" << endl;
+			cin >> contrasenia;
+
+			if (nombre == "admin" && contrasenia == "admin") {
+				menuAdministrador();
+			}
+			else {
+				cout << "Usuario o Contrasenia erroneos" << endl;
+			}
+
+			break;
+
+		case 2:
+			cout << endl << endl;
+			cout << "Usuario" << endl<<endl;
+			cout << "Ingrese username del usuario" << endl;
+			cin >> nombre;
+			cout << "Ingrese departamento" << endl;
+			cin >> departamento;
+			cout << "Ingrese empresa" << endl;
+			cin >> empresa;
+			cout << "Ingrese contraseña" << endl;
+			cin >> contrasenia;
+
+			if (tablero->buscarNodo(nombre,empresa,departamento) != 0) {
+				if (tablero->buscarNodo(nombre, empresa, departamento)->empleado->getContrasenia() == contrasenia) {
+					menuUsuario(tablero->buscarNodo(nombre, empresa, departamento));
+				}
+				else {
+					cout << "Username o Contraseña erroneos." << endl;
+				}
+			}
+			else {
+				cout << nombre << " " << departamento << " " << empresa;
+			}
+
+
+			break;
+		case 3:
+			validador = false;
+			break;
+		default:
+			break;
+		}
+	}
+	
+}
 
 
 
@@ -76,7 +148,7 @@ string getDate()
 	if (atoi(Sec.c_str()) < 10)
 		Sec = "0" + Sec;
 
-	
+
 	string Fecha = Day + "/" + Month + "/" + "/" + Year + " -- " + Hour + ":" + Min + ":" + Sec;
 	return Fecha;
 }
@@ -88,6 +160,8 @@ void activosUser() {};
 void rentasCsuario();
 void activosDeUsuario() {}; // Grafica de arbol despues de buscar en matriz
 
+void reporteXdepartamento();
+void reporteXempresa();
 
 void ordenarTransac() {};
 
@@ -167,21 +241,17 @@ void registrarUsuario() {
 
 	string userName, contrasea, nombreCompleto, departamento, empresa;
 	system("cls");
+	cout << "Por favor, SIN ESPACIOS." << endl << endl;
 	cout << "Ingresar Nombre de usuario" << endl;
-	cin.getline((char*)userName.c_str(), 100, '\n');
-	cin.ignore();
+	cin >> userName;
 	cout << "Ingresar Contraseña" << endl;
-	cin.getline((char*)contrasea.c_str(), 100, '\n');
-	cin.ignore();
+	cin >> contrasea;
 	cout << "Ingresar Nombre completo" << endl;
-	cin.getline((char*)nombreCompleto.c_str(), 100, '\n');
-	cin.ignore();
+	cin >> nombreCompleto;
 	cout << "Ingresar Departamento" << endl;
-	cin.getline((char*)departamento.c_str(), 100, '\n');
-	cin.ignore();
+	cin >> departamento;
 	cout << "Ingresar Empresa" << endl;
-	cin.getline((char*)empresa.c_str(), 100, '\n');
-	cin.ignore();
+	cin >> empresa;
 
 	tablero->insertarElemento(userName, contrasea, nombreCompleto, ActivosRenta(), empresa, departamento);
 }
@@ -266,11 +336,11 @@ void agregarA(ActivosRenta arbolUsuario) {
 		return;
 	}
 	cout << "Ingrese nombre del activo." << endl;
-	cin.getline((char*)nombreActivo.c_str(), 100, '\n');
 	cin.ignore();
+	cin.getline((char*)nombreActivo.c_str(), 100, '\n');
+
 	cout << "Ingrese descripcion." << endl;
 	cin.getline((char*)descripcion.c_str(), 100, '\n');
-	cin.ignore();
 
 	arbolUsuario.insertar(nombreActivo, codigo, descripcion, true);
 
@@ -447,7 +517,7 @@ int main()
 	arbol2.insertar("a7", 11, "", false);
 	arbol2.insertar("a8", 17, "", true);
 	arbol2.insertar("a9", 15, "", true);
-	
+
 
 	ActivosRenta arbol3;
 
@@ -487,8 +557,8 @@ int main()
 	tablero->insertarElemento("Albrto", "alb", "fd", arbol, "max", "guatemala");
 	tablero->insertarElemento("Mario", "alb", "fd", arbol, "hp", "guatemala");
 	tablero->insertarElemento("Alfredo", "asd", "fd", arbol, "max", "jutiapa");
+
 	
-	tablero->recorrerTablero();
 
 	//registrarUsuario();
 	//tablero->graficar();
@@ -505,11 +575,10 @@ int main()
 	transacciones->insertar("asfadsfasd354f", 10, "5c", new NodoTablero("", new DatosEmpleado("", "", "Ascari", arbol, "", "")), "", "");
 
 
-	transacciones->recorrer();
+	logIn();
+	
 	//transacciones->graficar();
 	//transacciones->graficarXusuario(prueba);
-	tablero->reporteEmpresa("walmart");
-	tablero->reporteDepartamento("guatemala");
 	string a;
 
 	/*
@@ -524,7 +593,7 @@ int main()
 	miObjeto->insertarElemento("mynor", 6, "walmart", "Guatemala");
 	*/
 
-	
+
 
 	//arbol.recor();
 
