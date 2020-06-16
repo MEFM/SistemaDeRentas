@@ -1,7 +1,7 @@
 #include "Tablero.h"
 
 NodoTablero* Tablero::crearEmpresa(string empresa) {
-	NodoTablero* empre = new NodoTablero(empresa, new DatosEmpleado("E", "E", "E", ActivosRenta(), "E", "E"));
+	NodoTablero* empre = new NodoTablero(empresa, new DatosEmpleado("E", "E", "E", new ActivosRenta(), "E", "E"));
 
 	NodoTablero* auxiliar = this->cabecera;
 
@@ -17,7 +17,7 @@ NodoTablero* Tablero::crearEmpresa(string empresa) {
 
 NodoTablero* Tablero::crearDepartamento(string departamento) {
 	NodoTablero* depart =
-		new NodoTablero(departamento, new DatosEmpleado("D", "D", "D", ActivosRenta(), "D", "D"));
+		new NodoTablero(departamento, new DatosEmpleado("D", "D", "D", new ActivosRenta(), "D", "D"));
 	NodoTablero* auxiliar = this->cabecera;
 
 	while (auxiliar->siguiente != 0) {
@@ -92,7 +92,7 @@ bool Tablero::verificarEmpresa(string empresa, NodoTablero* inicio, NodoTablero*
 	return false;
 }
 
-void Tablero::insertarElemento(string usernarme, string contraseña, string nombreCompleto, ActivosRenta rentas, string departamento, string empresa) {
+void Tablero::insertarElemento(string usernarme, string contraseña, string nombreCompleto, ActivosRenta* rentas, string departamento, string empresa) {
 
 	NodoTablero* nUsuario = new NodoTablero(usernarme,
 		new DatosEmpleado(usernarme, contraseña, nombreCompleto, rentas, departamento, empresa));
@@ -312,7 +312,7 @@ int Tablero::grupoColumna(NodoTablero* nodo) {
 	int group = 2;
 
 	while (col != 0) {
-		if (nodo->nombre == col->nombre) {
+		if (nodo->empleado->getDepartamento() == col->nombre) {
 			return group;
 		}
 		group++;
@@ -334,6 +334,32 @@ int Tablero::idGrupoColumna(NodoTablero* nodo) {
 	}
 	return 0;
 }
+
+
+int Tablero::node_idgraph(NodoTablero* temp)
+{
+	NodoTablero* auxiliar = cabecera->abajo;
+	int node_id = 0;
+
+	while (auxiliar != 0) {
+		NodoTablero* node = auxiliar->siguiente;
+
+		while (node != 0) {
+			if (temp->empleado == node->empleado) {
+				return node_id;
+			}
+
+			node_id++;
+			node = node->siguiente;
+		}
+
+
+		auxiliar = auxiliar->abajo;
+	}
+
+	return 0;
+}
+
 
 void Tablero::graficar() {
 	ofstream archivo("Matriz.dot");
@@ -418,6 +444,7 @@ void Tablero::graficar() {
 		contadorVertical++;
 		auxiliar = auxiliar->siguiente;
 	}
+	archivo << "A" << contadorVertical++ << ";" << endl;
 	archivo << "}" << endl;
 
 	archivo << endl << endl;
@@ -430,7 +457,18 @@ void Tablero::graficar() {
 		NodoTablero* node = auxiliar->siguiente;
 
 		while (node != 0) {
-			archivo << "N" << idNodo << "[label =" << "\"" << node->nombre << "\" width = 1.5, group =" << grupoColumna(node) << "];" << endl;
+
+
+			if (node->atras != 0) {
+				archivo << "N" << idNodo << "[label =" << "\"" << node->nombre << "\" width = 1.5,style = filled, fillcolor = green, group =" << grupoColumna(node) << "];" << endl;
+				cout << "Grupo " << grupoColumna(node) << endl;
+			}
+			else {
+				archivo << "N" << idNodo << "[label =" << "\"" << node->nombre << "\" width = 1.5, group =" << grupoColumna(node) << "];" << endl;
+				cout << "Grupo " << grupoColumna(node) << endl;
+			}
+
+
 			idNodo++;
 			node = node->siguiente;
 		}
@@ -445,7 +483,46 @@ void Tablero::graficar() {
 	int u = 0;
 
 
+	while (auxiliar != 0) {
 
+		NodoTablero* node = auxiliar->siguiente;
+
+		while (node != 0) {
+			
+			//Link a la izquierda
+
+			if (node->anterior->empleado->getNombre() == "E") {
+				archivo << "U" << u << "->" << "N" << idNodo << ";" << endl;
+				archivo << "N" << idNodo << "->" << "U" << u << ";" << endl;
+			}
+			else {
+
+				archivo << "N" << idNodo << "->" << "N" << idNodo - 1 << ";" << endl;
+				archivo << "N" << idNodo - 1 << "->" << "N" << idNodo << ";" << endl;
+
+			}
+
+			//Link hacia arriba
+
+			if (node->arriba->empleado->getNombre() == "D") {
+				archivo << "A" << idGrupoColumna(node->arriba) << "->" << "N" << idNodo << ";" << endl;
+				archivo << "N" << idNodo << "->" << "A" << idGrupoColumna(node->arriba) << ";" << endl;
+				cout << "Grupo " << idGrupoColumna(node->arriba) << endl;
+			}
+			else
+			{
+				archivo << "N" << idNodo << "->" << "N" << node_idgraph(node->arriba) << ";" << endl;
+				archivo << "N" << node_idgraph(node->arriba) << "->" << "N" << idNodo << ";" << endl;
+				//	cout << "Grupo " << idGrupoColumna(node->arriba) << endl;
+			}
+
+
+			idNodo++;
+			node = node->siguiente;
+		}
+		u++;
+		auxiliar = auxiliar->abajo;
+	}
 
 	archivo << endl;
 
@@ -496,7 +573,7 @@ void Tablero::reporteEmpresa(string empresa) {
 				if (auxiliar2->atras != 0) {
 					NodoTablero* auxiliar3 = auxiliar2;
 					while (auxiliar3 != 0) {
-						archivo << auxiliar3->empleado->getRentas().pasarDocumento(auxiliar3->nombre, contadorCluster);
+						archivo << auxiliar3->empleado->getRentas()->pasarDocumento(auxiliar3->nombre, contadorCluster);
 
 						contadorCluster = contadorCluster + 2;
 						auxiliar3 = auxiliar3->atras;
@@ -504,7 +581,7 @@ void Tablero::reporteEmpresa(string empresa) {
 				}
 				else {
 					cout << auxiliar2->nombre << endl;
-					archivo << auxiliar2->empleado->getRentas().pasarDocumento(auxiliar2->nombre, contadorCluster);
+					archivo << auxiliar2->empleado->getRentas()->pasarDocumento(auxiliar2->nombre, contadorCluster);
 				}
 
 				contadorCluster = contadorCluster + 2;
@@ -544,14 +621,14 @@ void Tablero::reporteDepartamento(string departamento) {
 					NodoTablero* auxiliar3 = auxiliar2;
 
 					while (auxiliar3 != 0) {
-						archivo << auxiliar3->empleado->getRentas().pasarDocumento(auxiliar3->nombre, contadorCluster);
+						archivo << auxiliar3->empleado->getRentas()->pasarDocumento(auxiliar3->nombre, contadorCluster);
 
 						contadorCluster = contadorCluster + 2;
 						auxiliar3 = auxiliar3->atras;
 					}
 				}
 				else {
-					archivo << auxiliar2->empleado->getRentas().pasarDocumento(auxiliar2->nombre, contadorCluster);
+					archivo << auxiliar2->empleado->getRentas()->pasarDocumento(auxiliar2->nombre, contadorCluster);
 				}
 
 				contadorCluster = contadorCluster + 2;

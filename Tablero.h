@@ -17,18 +17,18 @@ private:
 	string userName;
 	string contraseña;
 	string nombreCompleto;
-	ActivosRenta rentas;
+	ActivosRenta* rentas;
 
 
 public:
-	DatosEmpleado(string usernarme, string contraseña, string nombreCompleto, ActivosRenta rentas) {
+	DatosEmpleado(string usernarme, string contraseña, string nombreCompleto, ActivosRenta* rentas) {
 		this->userName = userName;
 		this->contraseña = contraseña;
 		this->nombreCompleto = nombreCompleto;
 		this->rentas = rentas;
 	}
 
-	DatosEmpleado(string usernarme, string contraseña, string nombreCompleto, ActivosRenta rentas, string departamento, string empresa) {
+	DatosEmpleado(string usernarme, string contraseña, string nombreCompleto, ActivosRenta* rentas, string departamento, string empresa) {
 		this->userName = usernarme;
 		
 		this->contraseña = contraseña;
@@ -48,7 +48,7 @@ public:
 	void setNombre(string nombre) {
 		this->nombreCompleto;
 	}
-	void setRentas(ActivosRenta renta) {
+	void setRentas(ActivosRenta* renta) {
 		this->rentas = rentas;
 	}
 	void setDepartamento(string departamento) {
@@ -68,7 +68,7 @@ public:
 	string getUser() {
 		return userName;
 	}
-	ActivosRenta getRentas() {
+	ActivosRenta* getRentas() {
 		return rentas;
 	}
 	string getDepartamento() {
@@ -124,13 +124,14 @@ private:
 
 	int grupoColumna(NodoTablero*);
 	int idGrupoColumna(NodoTablero*);
+	int node_idgraph(NodoTablero* temp);
 public:
 	Tablero() {
 		//Aca va iniciado el nodo raiz
 		cabecera = new NodoTablero("", 0);
 	}
 
-	void insertarElemento(string usernarme, string contraseña, string nombreCompleto, ActivosRenta rentas, string departamento, string empresa);
+	void insertarElemento(string usernarme, string contraseña, string nombreCompleto, ActivosRenta* rentas, string departamento, string empresa);
 
 
 	NodoTablero* buscarNodo(string usuario);
