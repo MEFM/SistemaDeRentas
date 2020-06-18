@@ -1,42 +1,29 @@
 digraph a{
 node[shape=box];
-C01566848[ label = "Matrix", width = 1.5, style = filled, fillcolor = firebrick1, group = 1 ];
+C01066848[ label = "Matrix", width = 1.5, style = filled, fillcolor = firebrick1, group = 1 ];
 U0 [label = "guatemala"    pos = "5.3, 3.5!" width = 1.5 style = filled, fillcolor = bisque1, group = 1 ];
-U1 [label = "escuintla"    pos = "5.3, 3.5!" width = 1.5 style = filled, fillcolor = bisque1, group = 1 ];
-C01566848->U0
+C01066848->U0
 U0-> U1
 U1-> U0
-U1-> U2
-U2-> U1
 
 
 A0 [label = max   width = 1.5 style = filled, fillcolor = lightskyblue, group = 2 ];
-A1 [label = hp   width = 1.5 style = filled, fillcolor = lightskyblue, group = 3 ];
-C01566848->A0
+C01066848->A0
 A0-> A1
 A1-> A0
-A1-> A2
-A2-> A1
 {rank = same;
-C01566848;
+C01066848;
 A0;
 A1;
-A2;
 }
 
 
-N0[label ="Mynor" width = 1.5,style = filled, fillcolor = green, group =2];
-N1[label ="Estuardo" width = 1.5, group =3];
+N0[label ="A" width = 1.5,style = filled, fillcolor = green, group =2];
 
 U0->N0;
 N0->U0;
 A0->N0;
 N0->A0;
-U1->N1;
-N1->U1;
-A1->N1;
-N1->A1;
 
 {rank = same;U0;N0;}
-{rank = same;U1;N1;}
 }

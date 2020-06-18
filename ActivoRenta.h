@@ -3,6 +3,8 @@
 #include<string>
 #include <algorithm>
 #include <fstream>
+#include <cstdlib>
+
 
 #include <time.h>
 

@@ -3,6 +3,7 @@
 
 
 
+
 void ActivosRenta::insertar(string nombreActivo, const int dat, string descripcion, bool disponibilidad)
 {
 	NodoActivo* padre = 0;
@@ -12,8 +13,12 @@ void ActivosRenta::insertar(string nombreActivo, const int dat, string descripci
 
 	while (!(actual == 0) && dat != actual->dato) {
 		padre = actual;
-		if (dat > actual->dato) actual = actual->derecho;
-		else if (dat < actual->dato) actual = actual->izquierdo;
+		if (dat > actual->dato) {
+			actual = actual->derecho;
+		}
+		else if (dat < actual->dato) {
+			actual = actual->izquierdo;
+		}
 	}
 
 
@@ -36,7 +41,7 @@ void ActivosRenta::insertar(string nombreActivo, const int dat, string descripci
 }
 
 
-void ActivosRenta::insertar(string nombreActivo, const string dat, string descripcion, bool disponibilidad)
+void ActivosRenta::insertar(string nombreActivo, string dat, string descripcion, bool disponibilidad)
 {
 	NodoActivo* padre = 0;
 
@@ -45,8 +50,10 @@ void ActivosRenta::insertar(string nombreActivo, const string dat, string descri
 
 	while (!(actual == 0) && dat != actual->codAlfanum) {
 		padre = actual;
-		if (dat > actual->codAlfanum) actual = actual->derecho;
-		else if (dat < actual->codAlfanum) actual = actual->izquierdo;
+		if (dat > actual->codAlfanum) {
+			actual = actual->derecho;
+		}
+		else if (dat < actual->codAlfanum) { actual = actual->izquierdo; }
 	}
 
 
@@ -132,13 +139,16 @@ void ActivosRenta::rotacionDobleDerecha(NodoActivo* nodo)
 
 	switch (R->FE) {
 	case -1:
-		Q->FE = 0; P->FE = 1;
+		Q->FE = 0;
+		P->FE = 1;
 		break;
 	case 0:
-		Q->FE = 0; P->FE = 0;
+		Q->FE = 0;
+		P->FE = 0;
 		break;
 	case 1:
-		Q->FE = -1; P->FE = 0;
+		Q->FE = -1;
+		P->FE = 0;
 		break;
 	}
 	R->FE = 0;
@@ -493,7 +503,8 @@ NodoActivo* ActivosRenta::buscarActivo(NodoActivo* nodo, int id) {
 
 NodoActivo* ActivosRenta::buscarActivo(string codigoActivo) {
 	if (this->raiz != 0) {
-		return this->buscarActivo(this->raiz, codigoActivo);
+		NodoActivo* aux = this->buscarActivo(this->raiz, codigoActivo);
+		return aux;
 	}
 	else {
 		cout << "No existen activos en este usuario" << endl;
@@ -502,21 +513,21 @@ NodoActivo* ActivosRenta::buscarActivo(string codigoActivo) {
 }
 
 NodoActivo* ActivosRenta::buscarActivo(NodoActivo* nodo, string id) {
-	if (nodo != 0) {
-		if (id < nodo->codAlfanum) {
-			buscarActivo(nodo->izquierdo, id);
-		}
-		else if (id > nodo->codAlfanum) {
-			buscarActivo(nodo->derecho, id);
-		}
-		else {
-			return nodo;
-		}
-	}
-	else {
+	actual = raiz;
 
-		return 0;
+
+	while (!(actual == 0)) {
+		if (id == actual->codAlfanum) {
+			return actual;
+		}
+		else if (id > actual->codAlfanum) {
+			actual = actual->derecho;
+		}
+		else if (id < actual->codAlfanum) {
+			actual = actual->izquierdo;
+		}
 	}
+	return 0;
 }
 
 
@@ -530,7 +541,7 @@ void ActivosRenta::reservados() {
 void ActivosRenta::reservados(NodoActivo* nodo) {
 	if (nodo != 0) {
 		if (nodo->disponibilidad == false) {
-			cout << "Id: " << nodo->dato << " Nombre activo: " << nodo->nombreActivo << " Disponibilidad: Alquilado" << endl;
+			cout << "Id: " << nodo->codAlfanum << " Nombre activo: " << nodo->nombreActivo << " Disponibilidad: Alquilado" << endl;
 		}
 		reservados(nodo->izquierdo);
 		reservados(nodo->derecho);
@@ -549,7 +560,7 @@ void ActivosRenta::libres() {
 void ActivosRenta::libres(NodoActivo* nodo) {
 	if (nodo != 0) {
 		if (nodo->disponibilidad == true) {
-			cout << "Id: " << nodo->dato << " Nombre activo: " << nodo->nombreActivo << "; Disponibilidad: Disponible" << endl;
+			cout << "Id: " << nodo->codAlfanum << " Nombre activo: " << nodo->nombreActivo << "; Disponibilidad: Disponible" << endl;
 		}
 		libres(nodo->izquierdo);
 		libres(nodo->derecho);
@@ -579,7 +590,7 @@ void ActivosRenta::graficar(NodoActivo* nodo) {
 		controla += "				D" + nodo->codAlfanum + "[label = \"" + nodo->codAlfanum + " Nombre Activo: " + nodo->nombreActivo + "\"]\n";
 
 		if (nodo->izquierdo != 0) {
-		
+
 			controla += "				D" + nodo->izquierdo->codAlfanum + "[label = \"" + nodo->codAlfanum + " Nombre Activo: " + nodo->nombreActivo + "\"]\n";
 			controla += "				D" + nodo->codAlfanum + "-> D" + nodo->izquierdo->codAlfanum + "\n";
 			//			controla += nodo->codAlfanum + "->" + nodo->izquierdo->codAlfanum + "\n";

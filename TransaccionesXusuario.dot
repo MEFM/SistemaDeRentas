@@ -3,26 +3,24 @@ rankdir = LR
 node[shape = rectangle]
 compound = true;
 subgraph cluster0{
-Titular[label = "MEFM"]
+Titular[label = "B"]
 label = "Usuario"
 }
 
 
 subgraph cluster1{
 label = "Transacciones"
-X0074C438[label = "Id_Transaccion: arrancala234
-Nombre Activo: 1a 
-Usuario: Estui
-Fecha: sdfsdf"]
-X00742BC0[label = "Id_Transaccion: asfadsfasdf
-Nombre Activo: 1a 
-Usuario: Estui
-Fecha: sdfsdf"]
-X0074C4E8[label = "Id_Transaccion: fasf332123
-Nombre Activo: 1a 
-Usuario: Estui
-Fecha: sdfsdf"]
+X01074C38[label = "Id_Transaccion: DC7UgLxTLJwjnAX
+Nombre Activo: asfd
+Usuario: B
+Fecha: 18/06//2020 -- 03:35:22
+Rentado"]
+X01074B68[label = "Id_Transaccion: xfPda5rqKQZTEmU
+Nombre Activo: asdf
+Usuario: B
+Fecha: 18/06//2020 -- 03:35:12
+Rentado"]
 }
 
-Titular -> X0074C4E8[ltail=cluster0 lhead=cluster1]
+Titular -> X01074B68[ltail=cluster0 lhead=cluster1]
 }

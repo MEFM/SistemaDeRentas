@@ -1,9 +1,11 @@
 digraph reporte{
 node [shape = record, style=filled, fillcolor=seashell2];
-				DaIlYKDv4YUk2SFs[label = "aIlYKDv4YUk2SFs Nombre Activo: "]
-				Dafwjk0BhaaxGJLL[label = "afwjk0BhaaxGJLL Nombre Activo: "]
-				Dafwjk0BhaaxGJLL[label = "aIlYKDv4YUk2SFs Nombre Activo: "]
-				DaIlYKDv4YUk2SFs-> Dafwjk0BhaaxGJLL
-				Dafwjk0BhaaxGJLL[label = "afwjk0BhaaxGJLL Nombre Activo: "]
+				Dafwjk0BhaaxGJLL[label = "afwjk0BhaaxGJLL Nombre Activo: MiCasita"]
+				DaIlYKDv4YUk2SFs[label = "afwjk0BhaaxGJLL Nombre Activo: MiCasita"]
+				Dafwjk0BhaaxGJLL-> DaIlYKDv4YUk2SFs
+				DkPBvdLWXGs3T86H[label = "afwjk0BhaaxGJLL Nombre Activo: MiCasita"]
+				Dafwjk0BhaaxGJLL-> DkPBvdLWXGs3T86H
+				DaIlYKDv4YUk2SFs[label = "aIlYKDv4YUk2SFs Nombre Activo: asdf"]
+				DkPBvdLWXGs3T86H[label = "kPBvdLWXGs3T86H Nombre Activo: afer"]
 
 }

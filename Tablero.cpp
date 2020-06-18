@@ -732,7 +732,7 @@ NodoActivo* Tablero::reservarActivo(string codigoActivo) {
 		while (auxiliar1 != 0) {
 
 			if (auxiliar1->atras != 0) {
-				NodoTablero* auxiliar2 = auxiliar1->atras;
+				NodoTablero* auxiliar2 = auxiliar1;
 
 				while (auxiliar2 != 0) {
 					//auxiliar2->empleado->getRentas()->libres();
@@ -761,7 +761,39 @@ NodoActivo* Tablero::reservarActivo(string codigoActivo) {
 }
 
 
+NodoTablero* Tablero::nodoObjetivo(string alfanumerico) {
+	NodoTablero* auxiliar = this->cabecera->siguiente;
+	NodoActivo* retorno = 0;
 
+	while (auxiliar != 0) {
+
+		NodoTablero* auxiliar1 = auxiliar->abajo;
+		while (auxiliar1 != 0) {
+
+			if (auxiliar1->atras != 0) {
+				NodoTablero* auxiliar2 = auxiliar1;
+
+				while (auxiliar2 != 0) {
+					if (auxiliar2->empleado->getRentas()->buscar(alfanumerico) == true) {
+						return auxiliar2;
+					}
+					auxiliar2 = auxiliar2->atras;
+				}
+			}
+			else {
+				if (auxiliar1->empleado->getRentas()->buscar(alfanumerico) == true) {
+					return auxiliar1;
+				}
+			}
+
+			auxiliar1 = auxiliar1->abajo;
+		}
+
+		auxiliar = auxiliar->siguiente;
+	}
+
+	return 0;
+}
 
 int generador_id;
 

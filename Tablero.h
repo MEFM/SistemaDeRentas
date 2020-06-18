@@ -161,6 +161,6 @@ public:
 	NodoActivo* reservarActivo(string alfaNumerico);
 	NodoActivo* reservarActivo(int codigo); //provicional
 
-
+	NodoTablero* nodoObjetivo(string alfanumerico);
 };
 
