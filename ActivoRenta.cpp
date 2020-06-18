@@ -36,6 +36,39 @@ void ActivosRenta::insertar(string nombreActivo, const int dat, string descripci
 }
 
 
+void ActivosRenta::insertar(string nombreActivo, const string dat, string descripcion, bool disponibilidad)
+{
+	NodoActivo* padre = 0;
+
+
+	actual = raiz;
+
+	while (!(actual == 0) && dat != actual->codAlfanum) {
+		padre = actual;
+		if (dat > actual->codAlfanum) actual = actual->derecho;
+		else if (dat < actual->codAlfanum) actual = actual->izquierdo;
+	}
+
+
+	if (!(actual == 0)) {
+		return;
+	}
+	if ((padre == 0)) {
+		raiz = new NodoActivo(nombreActivo, dat, descripcion, disponibilidad);
+	}
+
+	else if (dat < padre->codAlfanum) {
+		padre->izquierdo = new NodoActivo(nombreActivo, dat, descripcion, disponibilidad, padre);
+		equilibrar(padre, IZQUIERDO, true);
+	}
+
+	else if (dat > padre->codAlfanum) {
+		padre->derecho = new NodoActivo(nombreActivo, dat, descripcion, disponibilidad, padre);
+		equilibrar(padre, DERECHO, true);
+	}
+}
+
+
 void ActivosRenta::equilibrar(NodoActivo* nodo, int rama, bool nuevo)
 {
 	bool salir = false;
@@ -296,6 +329,25 @@ bool ActivosRenta::buscar(const int dat)
 	return false; // No está en árbol
 }
 
+bool ActivosRenta::buscar(string xodigo) {
+	actual = raiz;
+
+
+	while (!(actual == 0)) {
+		if (xodigo == actual->codAlfanum) {
+			return true;
+		}
+		else if (xodigo > actual->codAlfanum) {
+			actual = actual->derecho;
+		}
+		else if (xodigo < actual->codAlfanum) {
+			actual = actual->izquierdo;
+		}
+	}
+	return false; // No está en árbol
+
+}
+
 int ActivosRenta::Altura(const int dat)
 {
 	int altura = 0;
@@ -409,6 +461,7 @@ void ActivosRenta::modificar(int aReemplazar, string nombreActivo, const int dat
 	}
 }
 
+
 NodoActivo* ActivosRenta::buscarActivo(int id) {
 	if (this->raiz != 0) {
 		return buscarActivo(this->raiz, id);
@@ -430,6 +483,39 @@ NodoActivo* ActivosRenta::buscarActivo(NodoActivo* nodo, int id) {
 		else {
 			return nodo;
 		}
+	}
+	else {
+
+		return 0;
+	}
+}
+
+
+NodoActivo* ActivosRenta::buscarActivo(string codigoActivo) {
+	if (this->raiz != 0) {
+		return this->buscarActivo(this->raiz, codigoActivo);
+	}
+	else {
+		cout << "No existen activos en este usuario" << endl;
+		return 0;
+	}
+}
+
+NodoActivo* ActivosRenta::buscarActivo(NodoActivo* nodo, string id) {
+	if (nodo != 0) {
+		if (id < nodo->codAlfanum) {
+			buscarActivo(nodo->izquierdo, id);
+		}
+		else if (id > nodo->codAlfanum) {
+			buscarActivo(nodo->derecho, id);
+		}
+		else {
+			return nodo;
+		}
+	}
+	else {
+
+		return 0;
 	}
 }
 
@@ -456,14 +542,14 @@ void ActivosRenta::libres() {
 		this->libres(this->raiz);
 	}
 	else {
-		cout << "No hay activos en este usuario." << endl;
+		cout << "Sin activos disponibles." << endl;
 	}
 }
 
 void ActivosRenta::libres(NodoActivo* nodo) {
 	if (nodo != 0) {
 		if (nodo->disponibilidad == true) {
-			cout << "Id: " << nodo->dato << " Nombre activo: " << nodo->nombreActivo << " Disponibilidad: Disponible" << endl;
+			cout << "Id: " << nodo->dato << " Nombre activo: " << nodo->nombreActivo << "; Disponibilidad: Disponible" << endl;
 		}
 		libres(nodo->izquierdo);
 		libres(nodo->derecho);
@@ -490,10 +576,13 @@ void ActivosRenta::graficar(NodoActivo* nodo) {
 		WriteFile << "digraph reporte{" << endl;
 		WriteFile << "node [shape = record, style=filled, fillcolor=seashell2];" << endl;
 
+		controla += "				D" + nodo->codAlfanum + "[label = \"" + nodo->codAlfanum + " Nombre Activo: " + nodo->nombreActivo + "\"]\n";
 
 		if (nodo->izquierdo != 0) {
-			//WriteFile << nodo->nombreActivo << "->" << nodo->izquierdo->nombreActivo << endl;
-			controla += nodo->nombreActivo + "->" + nodo->izquierdo->nombreActivo + "\n";
+		
+			controla += "				D" + nodo->izquierdo->codAlfanum + "[label = \"" + nodo->codAlfanum + " Nombre Activo: " + nodo->nombreActivo + "\"]\n";
+			controla += "				D" + nodo->codAlfanum + "-> D" + nodo->izquierdo->codAlfanum + "\n";
+			//			controla += nodo->codAlfanum + "->" + nodo->izquierdo->codAlfanum + "\n";
 		}
 		else {
 			this->graficar(nodo->izquierdo);
@@ -501,7 +590,10 @@ void ActivosRenta::graficar(NodoActivo* nodo) {
 		}
 
 		if (nodo->derecho != 0) {
-			controla += nodo->nombreActivo + "->" + nodo->derecho->nombreActivo + "\n";
+			//WriteFile << "D" << nodo->codAlfanum << "[label = \"" << nodo->codAlfanum << "\nNombre: " << nodo->nombreActivo << "\"]" << endl;
+			controla += "				D" + nodo->derecho->codAlfanum + "[label = \"" + nodo->codAlfanum + " Nombre Activo: " + nodo->nombreActivo + "\"]\n";
+			controla += "				D" + nodo->codAlfanum + "-> D" + nodo->derecho->codAlfanum + "\n";
+			//	controla += nodo + "->" + nodo->derecho->codAlfanum + "\n";
 
 		}
 		else {
@@ -516,7 +608,7 @@ void ActivosRenta::graficar(NodoActivo* nodo) {
 		WriteFile << controla << endl;
 		WriteFile << "}" << endl;
 		WriteFile.close();
-		//controla = "";
+
 	}
 }
 
@@ -551,7 +643,7 @@ string ActivosRenta::pasarDocumento(string nombre, NodoActivo* nodo, int numClus
 
 		archivo += "\n";
 		archivo += "                                  Titulo" + to_string(numCluster);
-		archivo += "                                  -> " + nodo->nombreActivo + "[ltail=cluster" + to_string(numCluster);
+		archivo += "                                  -> D" + nodo->codAlfanum + "[ltail=cluster" + to_string(numCluster);
 		archivo += " lhead=cluster" + to_string(numCluster + 1);
 		archivo += "]\n";
 		archivo += "                                  ;\n";
@@ -565,15 +657,24 @@ void ActivosRenta::arbolIndividual(NodoActivo* nodo) {
 	if (nodo != 0) {
 
 
+		activado += "								D" + nodo->codAlfanum + "[label = \"" + nodo->codAlfanum + " Nombre Activo: " + nodo->nombreActivo + "\"]\n";
 		if (nodo->izquierdo != 0) {
-			activado += "                                  ";
-			activado += nodo->nombreActivo + "->" + nodo->izquierdo->nombreActivo + "\n";
+			activado += "								D" + nodo->izquierdo->codAlfanum + "[label = \"" + nodo->codAlfanum + " Nombre Activo: " + nodo->nombreActivo + "\"]\n";
+			activado += "								D" + nodo->codAlfanum + "-> D" + nodo->izquierdo->codAlfanum + "\n";
 			cout << nodo->nombreActivo << endl;
 		}
+		else {
+			this->arbolIndividual(nodo->izquierdo);
+			this->arbolIndividual(nodo->derecho);
+		}
 		if (nodo->derecho != 0) {
-			activado += "                                  ";
-			activado += nodo->nombreActivo + "->" + nodo->derecho->nombreActivo + "\n";
-			cout << nodo->nombreActivo << endl;
+			activado += "								D" + nodo->derecho->codAlfanum + "[label = \"" + nodo->codAlfanum + " Nombre Activo: " + nodo->nombreActivo + "\"]\n";
+			activado += "								D" + nodo->codAlfanum + "-> D" + nodo->derecho->codAlfanum + "\n";
+
+		}
+		else {
+			this->arbolIndividual(nodo->izquierdo);
+			this->arbolIndividual(nodo->derecho);
 		}
 
 		this->arbolIndividual(nodo->izquierdo);

@@ -648,3 +648,149 @@ void Tablero::reporteDepartamento(string departamento) {
 
 
 }
+
+void Tablero::activosDisponibles() {
+
+	NodoTablero* auxiliar = this->cabecera->siguiente;
+
+	while (auxiliar != 0) {
+
+		NodoTablero* auxiliar1 = auxiliar->abajo;
+		while (auxiliar1 != 0) {
+
+			if (auxiliar1->atras != 0) {
+				NodoTablero* auxiliar2 = auxiliar1;
+				
+				while (auxiliar2 != 0) {
+					auxiliar2->empleado->getRentas()->libres();
+
+					auxiliar2 = auxiliar2->atras;
+				}
+			}
+			else {
+				auxiliar1->empleado->getRentas()->libres();
+			}
+
+			auxiliar1 = auxiliar1->abajo;
+		}
+
+		auxiliar = auxiliar->siguiente;
+	}
+
+}
+
+
+
+NodoActivo* Tablero::reservarActivo(int codigo) {
+
+	NodoTablero* auxiliar = this->cabecera->siguiente;
+	NodoActivo* retorno = 0;
+
+	while (auxiliar != 0) {
+
+		NodoTablero* auxiliar1 = auxiliar->abajo;
+		while (auxiliar1 != 0) {
+
+			if (auxiliar1->atras != 0) {
+				NodoTablero* auxiliar2 = auxiliar1->atras;
+
+				while (auxiliar2 != 0) {
+					//auxiliar2->empleado->getRentas()->libres();
+					retorno = auxiliar2->empleado->getRentas()->buscarActivo(codigo);
+					if (retorno != 0) {
+						return retorno;
+					}
+					auxiliar2 = auxiliar2->atras;
+				}
+			}
+			else {
+//				auxiliar1->empleado->getRentas()->libres();
+				retorno = auxiliar1->empleado->getRentas()->buscarActivo(codigo);
+				if (retorno != 0) {
+					return retorno;
+				}
+			}
+
+			auxiliar1 = auxiliar1->abajo;
+		}
+
+		auxiliar = auxiliar->siguiente;
+	}
+
+	return 0;
+}
+
+
+NodoActivo* Tablero::reservarActivo(string codigoActivo) {
+
+	NodoTablero* auxiliar = this->cabecera->siguiente;
+	NodoActivo* retorno = 0;
+
+	while (auxiliar != 0) {
+
+		NodoTablero* auxiliar1 = auxiliar->abajo;
+		while (auxiliar1 != 0) {
+
+			if (auxiliar1->atras != 0) {
+				NodoTablero* auxiliar2 = auxiliar1->atras;
+
+				while (auxiliar2 != 0) {
+					//auxiliar2->empleado->getRentas()->libres();
+					retorno = auxiliar2->empleado->getRentas()->buscarActivo(codigoActivo);
+					if (retorno != 0) {
+						return retorno;
+					}
+					auxiliar2 = auxiliar2->atras;
+				}
+			}
+			else {
+				//				auxiliar1->empleado->getRentas()->libres();
+				retorno = auxiliar1->empleado->getRentas()->buscarActivo(codigoActivo);
+				if (retorno != 0) {
+					return retorno;
+				}
+			}
+
+			auxiliar1 = auxiliar1->abajo;
+		}
+
+		auxiliar = auxiliar->siguiente;
+	}
+
+	return 0;
+}
+
+
+
+
+int generador_id;
+
+string Tablero::Generarid() {
+
+	string id = "";
+	char strrnd[15];
+	srand(time(NULL));
+
+	for (int i = 0; i < 15; i++) {
+
+		generador_id = 48 + rand() % (123 - 48);
+	
+
+		if ((generador_id >= 48 && generador_id <= 57) || (generador_id >= 65 && generador_id <= 90) || (generador_id >= 97 && generador_id <= 122))
+		{
+
+			strrnd[i] = generador_id;
+			id = id + strrnd[i];
+
+		}
+		else {
+			i--;
+		}
+
+		//cout << strrnd[i];
+
+	}
+	//cout << id << endl;
+
+	return id;
+}

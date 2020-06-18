@@ -1,12 +1,9 @@
 digraph reporte{
 node [shape = record, style=filled, fillcolor=seashell2];
-Hol->Mi
-Hol->Gf
-Mi->Lp
-Mi->Qw
-Gf->bf
-Gf->Ml
-Ml->Op
-Ml->Mk
+				DaIlYKDv4YUk2SFs[label = "aIlYKDv4YUk2SFs Nombre Activo: "]
+				Dafwjk0BhaaxGJLL[label = "afwjk0BhaaxGJLL Nombre Activo: "]
+				Dafwjk0BhaaxGJLL[label = "aIlYKDv4YUk2SFs Nombre Activo: "]
+				DaIlYKDv4YUk2SFs-> Dafwjk0BhaaxGJLL
+				Dafwjk0BhaaxGJLL[label = "afwjk0BhaaxGJLL Nombre Activo: "]
 
 }

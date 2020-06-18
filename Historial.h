@@ -19,7 +19,9 @@ public:
 	string alfaNumerico;
 	bool disponibilidad;
 
-	NodoHistorial(string alfaNumerico,int codigo,string nombreaActivo,NodoTablero* usuario, string fecha, string tiempo) {
+	string codigoActivo;
+
+	NodoHistorial(string alfaNumerico,int codigo,string nombreaActivo,NodoTablero* usuario, string fecha, string tiempo, bool disponibilidad) {
 		this->siguiente = 0;
 		this->anterior = 0;
 
@@ -30,6 +32,19 @@ public:
 		this->tiempoRenta = tiempo;
 		this->alfaNumerico = alfaNumerico;
 
+	}
+
+	NodoHistorial(string alfaNumerico, string codigoActivo, string nombreaActivo, NodoTablero* usuario, string fecha, string tiempo, bool disponibilidad) {
+		this->siguiente = 0;
+		this->anterior = 0;
+
+		this->codigoActivo = codigoActivo;
+		this->nombreActivo = nombreaActivo;
+		this->usuario = usuario;
+		this->fechaRenta = fecha;
+		this->tiempoRenta = tiempo;
+		this->alfaNumerico = alfaNumerico;
+		this->disponibilidad = disponibilidad;
 	}
 };
 
@@ -45,13 +60,21 @@ public:
 		this->ultimo = 0;
 	}
 
-	void insertar(string alfaNumerico,int id,string nombreActivo, NodoTablero* usuario, string fecha, string tiempo);
+	//Alfa numerico de historia y de activo, nombre activo, usuario, fecha, tiempo
+	void insertar(string alfaNumerico,int id,string nombreActivo, NodoTablero* usuario, string fecha, string tiempo, bool disponibilidad = true);
+
+	void insertar(string alfaNumerico, string idActivo, string nombreActivo, NodoTablero* usuario, string fecha, string tiempo, bool disponibilidad = true);
+
 	void ordenarMayorMenor();
 	void ordenarMenorMayor();
 	void recorrer();
 	bool verificarExistencia(int id);
 	void graficar();
+	void graficarAlReves();
+
 	void graficarXusuario(NodoTablero* usuario);
+
+	void devolucion(NodoTablero* usuario, string idActivo);
 
 };
 

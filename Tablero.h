@@ -1,9 +1,14 @@
+
+#pragma warning(disable : 4996)
 #pragma once
+
+
 #include <iostream>
 #include "ActivoRenta.h"
 #include <string>
 #include <fstream>
 #include <iostream>
+
 
 using namespace std;
 
@@ -133,6 +138,7 @@ public:
 
 	void insertarElemento(string usernarme, string contraseña, string nombreCompleto, ActivosRenta* rentas, string departamento, string empresa);
 
+	string Generarid();
 
 	NodoTablero* buscarNodo(string usuario);
 	NodoTablero* buscarNodo(string usuario, string departamento, string empresa);//Metodo de soporte
@@ -145,6 +151,16 @@ public:
 
 	void reporteEmpresa(string empresa);
 	void reporteDepartamento(string departamento);
+
+	void activosDisponibles();
+
+
+
+	NodoActivo* devolverActivo(string alfaNumerico);
+
+	NodoActivo* reservarActivo(string alfaNumerico);
+	NodoActivo* reservarActivo(int codigo); //provicional
+
 
 };
 

@@ -1,46 +1,51 @@
 digraph a{
 rankdir = LR
 node[shape = rectangle]
-X00F4AD78[label = "Id_Transaccion: afasdf232
+X00DEC0D0[label = "Id_Transaccion: afasdf232
 Nombre Activo: 2d
 Usuario: All Migth
-Fecha: "]
-X00F49408[label = "Id_Transaccion: arrancala234
+Fecha: Renta cancelada"]
+X00DEBF30[label = "Id_Transaccion: arrancala234
 Nombre Activo: 1a 
 Usuario: Estui
-Fecha: sdfsdf"]
-X00F4AE28[label = "Id_Transaccion: as234asdf
+Fecha: sdfsdf
+Rentado"]
+X00DEC1A0[label = "Id_Transaccion: as234asdf
 Nombre Activo: 3e
 Usuario: Deju
-Fecha: "]
-X00F4AED8[label = "Id_Transaccion: asfadsA3df
+Fecha: 
+Rentado"]
+X00DEC270[label = "Id_Transaccion: asfadsA3df
 Nombre Activo: 4f
 Usuario: Mario
-Fecha: "]
-X00F4B790[label = "Id_Transaccion: asfadsfasd354f
+Fecha: 
+Rentado"]
+X00DEC340[label = "Id_Transaccion: asfadsfasd354f
 Nombre Activo: 5c
 Usuario: Ascari
-Fecha: "]
-X00F49358[label = "Id_Transaccion: asfadsfasdf
+Fecha: 
+Rentado"]
+X00DEBE60[label = "Id_Transaccion: asfadsfasdf
 Nombre Activo: 1a 
 Usuario: Estui
-Fecha: sdfsdf"]
-X00F494B8[label = "Id_Transaccion: fasf332123
+Fecha: sdfsdf
+Rentado"]
+X00DEC000[label = "Id_Transaccion: fasf332123
 Nombre Activo: 1a 
 Usuario: Estui
-Fecha: sdfsdf"]
-X00F4AD78-> X00F49408
-X00F4AD78-> X00F494B8
-X00F49408-> X00F4AE28
-X00F49408-> X00F4AD78
-X00F4AE28-> X00F4AED8
-X00F4AE28-> X00F49408
-X00F4AED8-> X00F4B790
-X00F4AED8-> X00F4AE28
-X00F4B790-> X00F49358
-X00F4B790-> X00F4AED8
-X00F49358-> X00F494B8
-X00F49358-> X00F4B790
-X00F494B8-> X00F4AD78
-X00F494B8-> X00F49358
+Fecha: sdfsdfRenta cancelada"]
+X00DEC0D0-> X00DEBF30
+X00DEC0D0-> X00DEC000
+X00DEBF30-> X00DEC1A0
+X00DEBF30-> X00DEC0D0
+X00DEC1A0-> X00DEC270
+X00DEC1A0-> X00DEBF30
+X00DEC270-> X00DEC340
+X00DEC270-> X00DEC1A0
+X00DEC340-> X00DEBE60
+X00DEC340-> X00DEC270
+X00DEBE60-> X00DEC000
+X00DEBE60-> X00DEC340
+X00DEC000-> X00DEC0D0
+X00DEC000-> X00DEBE60
 }

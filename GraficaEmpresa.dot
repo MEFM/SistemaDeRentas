@@ -6,67 +6,143 @@ compound = true
                                   Titulo0                                  [label="Mynor"]
                                   }
                                   subgraph cluster1                                  {
-                                  label ="Activos"                                                                                                      c19s->c20sw
-                                  c19s->c24f
-                                  c20sw->c22L
-                                  c20sw->c23w
-                                  c24f->c25m
-                                  c24f->c27kiki
-                                  c27kiki->c21dddd
-                                  c27kiki->c26mio
+                                  label ="Activos"                                                                    								DmlOPo[label = "mlOPo Nombre Activo: c23w"]
+								Dafsd[label = "mlOPo Nombre Activo: c23w"]
+								DmlOPo-> Dafsd
+								Doiuo[label = "mlOPo Nombre Activo: c23w"]
+								DmlOPo-> Doiuo
+								Dafsd[label = "afsd Nombre Activo: c19s"]
+								DAdfc[label = "afsd Nombre Activo: c19s"]
+								Dafsd-> DAdfc
+								DcsxxqQ[label = "afsd Nombre Activo: c19s"]
+								Dafsd-> DcsxxqQ
+								DAdfc[label = "Adfc Nombre Activo: c22L"]
+								DAklaksdkioIQoi[label = "AklaksdkioIQoi Nombre Activo: c26mio"]
+								DAklaksdkioIQoi[label = "Adfc Nombre Activo: c22L"]
+								DAdfc-> DAklaksdkioIQoi
+								DAklaksdkioIQoi[label = "AklaksdkioIQoi Nombre Activo: c26mio"]
+								DcsxxqQ[label = "csxxqQ Nombre Activo: c24f"]
+								DcisCooo[label = "csxxqQ Nombre Activo: c24f"]
+								DcsxxqQ-> DcisCooo
+								DkPBvdLWXGs3T86H[label = "csxxqQ Nombre Activo: c24f"]
+								DcsxxqQ-> DkPBvdLWXGs3T86H
+								DcisCooo[label = "cisCooo Nombre Activo: c25m"]
+								DkPBvdLWXGs3T86H[label = "kPBvdLWXGs3T86H Nombre Activo: c27kiki"]
+								Doiuo[label = "oiuo Nombre Activo: c21dddd"]
+								Dqwer[label = "qwer Nombre Activo: c20sw"]
+								Dqwer[label = "oiuo Nombre Activo: c21dddd"]
+								Doiuo-> Dqwer
+								Dqwer[label = "qwer Nombre Activo: c20sw"]
                                   }
 
-                                  Titulo0                                  -> c19s[ltail=cluster0 lhead=cluster1]
+                                  Titulo0                                  -> DmlOPo[ltail=cluster0 lhead=cluster1]
                                   ;
                                   subgraph cluster2                                  {
                                   label = "Usuario";
                                   Titulo2                                  [label="roxana"]
                                   }
                                   subgraph cluster3                                  {
-                                  label ="Activos"                                                                                                      Hol->Mi
-                                  Hol->Gf
-                                  Mi->Lp
-                                  Mi->Qw
-                                  Gf->bf
-                                  Gf->Ml
-                                  Ml->Op
-                                  Ml->Mk
+                                  label ="Activos"                                                                    								D1q0[label = "1q0 Nombre Activo: Hol"]
+								D17e[label = "1q0 Nombre Activo: Hol"]
+								D1q0-> D17e
+								D5e[label = "1q0 Nombre Activo: Hol"]
+								D1q0-> D5e
+								D17e[label = "17e Nombre Activo: Mk"]
+								D11d[label = "17e Nombre Activo: Mk"]
+								D17e-> D11d
+								D1b3[label = "17e Nombre Activo: Mk"]
+								D17e-> D1b3
+								D11d[label = "11d Nombre Activo: bf"]
+								D15f[label = "15f Nombre Activo: Ml"]
+								D15f[label = "11d Nombre Activo: bf"]
+								D11d-> D15f
+								D15f[label = "15f Nombre Activo: Ml"]
+								D1b3[label = "1b3 Nombre Activo: Op"]
+								D1a[label = "1b3 Nombre Activo: Op"]
+								D1b3-> D1a
+								D1c2[label = "1b3 Nombre Activo: Op"]
+								D1b3-> D1c2
+								D1a[label = "1a Nombre Activo: Lp"]
+								D1c2[label = "1c2 Nombre Activo: Gf"]
+								D5e[label = "5e Nombre Activo: Mi"]
+								D6b[label = "6b Nombre Activo: Qw"]
+								D6b[label = "5e Nombre Activo: Mi"]
+								D5e-> D6b
+								D6b[label = "6b Nombre Activo: Qw"]
                                   }
 
-                                  Titulo2                                  -> Hol[ltail=cluster2 lhead=cluster3]
+                                  Titulo2                                  -> D1q0[ltail=cluster2 lhead=cluster3]
                                   ;
                                   subgraph cluster4                                  {
                                   label = "Usuario";
                                   Titulo4                                  [label="andrea"]
                                   }
                                   subgraph cluster5                                  {
-                                  label ="Activos"                                                                                                      a1->a2w
-                                  a1->a6
-                                  a2w->a4
-                                  a2w->a5
-                                  a6->a7
-                                  a6->a9
-                                  a9->a3ddd
-                                  a9->a8
+                                  label ="Activos"                                                                    								Dh5[label = "h5 Nombre Activo: a2w"]
+								D1j[label = "h5 Nombre Activo: a2w"]
+								Dh5-> D1j
+								Dk6[label = "h5 Nombre Activo: a2w"]
+								Dh5-> Dk6
+								D1j[label = "1j Nombre Activo: a4"]
+								D1f0[label = "1j Nombre Activo: a4"]
+								D1j-> D1f0
+								D1l2[label = "1j Nombre Activo: a4"]
+								D1j-> D1l2
+								D1f0[label = "1f0 Nombre Activo: a1"]
+								D15ni[label = "1f0 Nombre Activo: a1"]
+								D1f0-> D15ni
+								D15ni[label = "15ni Nombre Activo: a9"]
+								D15ni[label = "15ni Nombre Activo: a9"]
+								D1l2[label = "1l2 Nombre Activo: a6"]
+								D1n7[label = "1n7 Nombre Activo: a8"]
+								D1n7[label = "1l2 Nombre Activo: a6"]
+								D1l2-> D1n7
+								D1n7[label = "1n7 Nombre Activo: a8"]
+								Dk6[label = "k6 Nombre Activo: a5"]
+								Di13[label = "k6 Nombre Activo: a5"]
+								Dk6-> Di13
+								Dm11[label = "k6 Nombre Activo: a5"]
+								Dk6-> Dm11
+								Di13[label = "i13 Nombre Activo: a3ddd"]
+								Dm11[label = "m11 Nombre Activo: a7"]
                                   }
 
-                                  Titulo4                                  -> a1[ltail=cluster4 lhead=cluster5]
+                                  Titulo4                                  -> Dh5[ltail=cluster4 lhead=cluster5]
                                   ;
                                   subgraph cluster6                                  {
                                   label = "Usuario";
                                   Titulo6                                  [label="sebas"]
                                   }
                                   subgraph cluster7                                  {
-                                  label ="Activos"                                                                                                      b10->b11sw
-                                  b10->b15f
-                                  b11sw->b13L
-                                  b11sw->b14w
-                                  b15f->b16m
-                                  b15f->b18kiki
-                                  b18kiki->b12dddd
-                                  b18kiki->b17mio
+                                  label ="Activos"                                                                    								D55p6[label = "55p6 Nombre Activo: El"]
+								D1q3[label = "55p6 Nombre Activo: El"]
+								D55p6-> D1q3
+								Dr1[label = "55p6 Nombre Activo: El"]
+								D55p6-> Dr1
+								D1q3[label = "1q3 Nombre Activo: b12dddd"]
+								D11u[label = "1q3 Nombre Activo: b12dddd"]
+								D1q3-> D11u
+								D1t2[label = "1q3 Nombre Activo: b12dddd"]
+								D1q3-> D1t2
+								D11u[label = "11u Nombre Activo: b16m"]
+								D1t2[label = "1t2 Nombre Activo: b15f"]
+								D1v7[label = "1v7 Nombre Activo: b17mio"]
+								D1v7[label = "1t2 Nombre Activo: b15f"]
+								D1t2-> D1v7
+								D1v7[label = "1v7 Nombre Activo: b17mio"]
+								Dr1[label = "r1 Nombre Activo: b13L"]
+								Do10[label = "r1 Nombre Activo: b13L"]
+								Dr1-> Do10
+								Ds6[label = "r1 Nombre Activo: b13L"]
+								Dr1-> Ds6
+								Do10[label = "o10 Nombre Activo: b10"]
+								Ds6[label = "s6 Nombre Activo: b14w"]
+								Dw15[label = "w15 Nombre Activo: b18kiki"]
+								Dw15[label = "s6 Nombre Activo: b14w"]
+								Ds6-> Dw15
+								Dw15[label = "w15 Nombre Activo: b18kiki"]
                                   }
 
-                                  Titulo6                                  -> b10[ltail=cluster6 lhead=cluster7]
+                                  Titulo6                                  -> D55p6[ltail=cluster6 lhead=cluster7]
                                   ;
 }

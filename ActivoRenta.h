@@ -4,6 +4,9 @@
 #include <algorithm>
 #include <fstream>
 
+#include <time.h>
+
+
 //ActivoRenta
 
 using namespace std;
@@ -23,6 +26,8 @@ public:
 	NodoActivo* padre;
 	bool disponibilidad;
 
+	string codAlfanum;
+
 
 	NodoActivo(string nombreActivo, const int codigo, string descripcion, NodoActivo* pad = NULL, NodoActivo* izq = NULL, NodoActivo* der = NULL) {
 		this->dato = codigo;
@@ -34,10 +39,35 @@ public:
 		this->padre = pad;
 
 	}
-	
+
 
 	NodoActivo(string nombreActivo, const int codigo, string descripcion, bool disponibilidad, NodoActivo* pad = NULL, NodoActivo* izq = NULL, NodoActivo* der = NULL) {
 		this->dato = codigo;
+		this->FE = 0;
+		this->nombreActivo = nombreActivo;
+		this->descripcioN = descripcion;
+		this->izquierdo = izq;
+		this->derecho = der;
+		this->padre = pad;
+		this->disponibilidad = disponibilidad;
+
+	}
+
+
+	NodoActivo(string nombreActivo, string codigo, string descripcion, NodoActivo* pad = NULL, NodoActivo* izq = NULL, NodoActivo* der = NULL) {
+		this->codAlfanum = codigo;
+		this->FE = 0;
+		this->nombreActivo = nombreActivo;
+		this->descripcioN = descripcion;
+		this->izquierdo = izq;
+		this->derecho = der;
+		this->padre = pad;
+
+	}
+
+
+	NodoActivo(string nombreActivo, string codigo, string descripcion, bool disponibilidad, NodoActivo* pad = NULL, NodoActivo* izq = NULL, NodoActivo* der = NULL) {
+		this->codAlfanum = codigo;
 		this->FE = 0;
 		this->nombreActivo = nombreActivo;
 		this->descripcioN = descripcion;
@@ -100,6 +130,8 @@ private:
 	void graficar(NodoActivo* nodo);
 	NodoActivo* buscarActivo(NodoActivo* nodo, int id);
 
+	NodoActivo* buscarActivo(NodoActivo* nodo, string id);
+
 	string pasarDocumento(string,NodoActivo*, int,string);
 
 public:
@@ -110,6 +142,9 @@ public:
 	}
 
 	void insertar(string nombreActivo, const int dat, string descripcion, bool disponibilidad);
+
+	void insertar(string nombreActivo, string dat, string descripcion, bool disponibilidad);
+
 	void eliminar(const int dat);
 	bool buscar(const int dat);
 
@@ -118,6 +153,7 @@ public:
 	void libres();
 
 	NodoActivo* buscarActivo(int id);
+	NodoActivo* buscarActivo(string codigoActivo);
 
 	void modificar(int aReemplazar, string nombreActivo, const int dat, string descripcion, bool disponibilidad);
 
@@ -130,7 +166,7 @@ public:
 
 	string pasarDocumento(string nombre,int numCluster);
 
-
+	bool buscar(string);
 
 };
 
