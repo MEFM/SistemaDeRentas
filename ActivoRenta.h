@@ -21,8 +21,8 @@ public:
 
 	string nombreActivo;
 	string descripcioN;
-	int dato; //Codigo
-	int FE;
+	int dato; 
+	int factorEquilibrio;
 	NodoActivo* izquierdo;
 	NodoActivo* derecho;
 	NodoActivo* padre;
@@ -33,7 +33,7 @@ public:
 
 	NodoActivo(string nombreActivo, const int codigo, string descripcion, NodoActivo* pad = NULL, NodoActivo* izq = NULL, NodoActivo* der = NULL) {
 		this->dato = codigo;
-		this->FE = 0;
+		this->factorEquilibrio = 0;
 		this->nombreActivo = nombreActivo;
 		this->descripcioN = descripcion;
 		this->izquierdo = izq;
@@ -45,7 +45,7 @@ public:
 
 	NodoActivo(string nombreActivo, const int codigo, string descripcion, bool disponibilidad, NodoActivo* pad = NULL, NodoActivo* izq = NULL, NodoActivo* der = NULL) {
 		this->dato = codigo;
-		this->FE = 0;
+		this->factorEquilibrio = 0;
 		this->nombreActivo = nombreActivo;
 		this->descripcioN = descripcion;
 		this->izquierdo = izq;
@@ -58,7 +58,7 @@ public:
 
 	NodoActivo(string nombreActivo, string codigo, string descripcion, NodoActivo* pad = NULL, NodoActivo* izq = NULL, NodoActivo* der = NULL) {
 		this->codAlfanum = codigo;
-		this->FE = 0;
+		this->factorEquilibrio = 0;
 		this->nombreActivo = nombreActivo;
 		this->descripcioN = descripcion;
 		this->izquierdo = izq;
@@ -70,7 +70,7 @@ public:
 
 	NodoActivo(string nombreActivo, string codigo, string descripcion, bool disponibilidad, NodoActivo* pad = NULL, NodoActivo* izq = NULL, NodoActivo* der = NULL) {
 		this->codAlfanum = codigo;
-		this->FE = 0;
+		this->factorEquilibrio = 0;
 		this->nombreActivo = nombreActivo;
 		this->descripcioN = descripcion;
 		this->izquierdo = izq;
@@ -104,26 +104,18 @@ private:
 	void rotacionDobleDerecha(NodoActivo* nodo);
 
 	void Raiz() { actual = raiz; }
-	void auxContador(NodoActivo*);
-	void auxAltura(NodoActivo*, int);
 
 
-	bool EsHoja(NodoActivo* r) { return !r->derecho && !r->izquierdo; }
 
-	const int NumeroNodos();
-	const int AlturaArbol();
+	bool EsHoja(NodoActivo* r);
 
-	int Altura(const int dat);
 
-	int& ValorActual() { return actual->dato; }
+
 
 
 	void reservados(NodoActivo* nodo);
 	void libres(NodoActivo* nodo);
 
-	void inOrden(NodoActivo* nodo);
-	void preOrden(NodoActivo* nodo);
-	void postOrden(NodoActivo* nodo);
 
 	void recor(NodoActivo* nodo);
 
@@ -159,9 +151,7 @@ public:
 
 	void modificar(int aReemplazar, string nombreActivo, const int dat, string descripcion, bool disponibilidad);
 
-	void inOrden();
-	void preOrden();
-	void postOrden();
+
 	void graficar();
 
 	

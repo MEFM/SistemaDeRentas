@@ -67,7 +67,7 @@ public:
 
 	void ordenarMayorMenor();
 	void ordenarMenorMayor();
-	void recorrer();
+	void recorrer(NodoTablero* usuario);
 	bool verificarExistencia(int id);
 	void graficar();
 	void graficarAlReves();

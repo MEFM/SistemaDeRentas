@@ -1,2 +1,3 @@
-﻿  PPVPS2020.cpp
+﻿  ActivoRenta.cpp
+C:\Users\mynor\source\repos\PPVPS2020\PPVPS2020\ActivoRenta.cpp(456): warning C4715: 'ActivosRenta::buscarActivo': no todas las rutas de acceso de control devuelven un valor
   PPVPS2020.vcxproj -> C:\Users\mynor\source\repos\PPVPS2020\Debug\PPVPS2020.exe

@@ -1,11 +1,31 @@
 digraph reporte{
 node [shape = record, style=filled, fillcolor=seashell2];
-				Dafwjk0BhaaxGJLL[label = "afwjk0BhaaxGJLL Nombre Activo: MiCasita"]
-				DaIlYKDv4YUk2SFs[label = "afwjk0BhaaxGJLL Nombre Activo: MiCasita"]
-				Dafwjk0BhaaxGJLL-> DaIlYKDv4YUk2SFs
-				DkPBvdLWXGs3T86H[label = "afwjk0BhaaxGJLL Nombre Activo: MiCasita"]
-				Dafwjk0BhaaxGJLL-> DkPBvdLWXGs3T86H
-				DaIlYKDv4YUk2SFs[label = "aIlYKDv4YUk2SFs Nombre Activo: asdf"]
-				DkPBvdLWXGs3T86H[label = "kPBvdLWXGs3T86H Nombre Activo: afer"]
+				D1q0[label = "1q0 Nombre Activo: Hol"]
+				D17e[label = "1q0 Nombre Activo: Hol"]
+				D1q0-> D17e
+				D5e[label = "1q0 Nombre Activo: Hol"]
+				D1q0-> D5e
+				D17e[label = "17e Nombre Activo: Mk"]
+				D11d[label = "17e Nombre Activo: Mk"]
+				D17e-> D11d
+				D1b3[label = "17e Nombre Activo: Mk"]
+				D17e-> D1b3
+				D11d[label = "11d Nombre Activo: bf"]
+				D15f[label = "15f Nombre Activo: Ml"]
+				D15f[label = "11d Nombre Activo: bf"]
+				D11d-> D15f
+				D15f[label = "15f Nombre Activo: Ml"]
+				D1b3[label = "1b3 Nombre Activo: Op"]
+				D1a[label = "1b3 Nombre Activo: Op"]
+				D1b3-> D1a
+				D1c2[label = "1b3 Nombre Activo: Op"]
+				D1b3-> D1c2
+				D1a[label = "1a Nombre Activo: Lp"]
+				D1c2[label = "1c2 Nombre Activo: Gf"]
+				D5e[label = "5e Nombre Activo: Mi"]
+				D6b[label = "6b Nombre Activo: Qw"]
+				D6b[label = "5e Nombre Activo: Mi"]
+				D5e-> D6b
+				D6b[label = "6b Nombre Activo: Qw"]
 
 }

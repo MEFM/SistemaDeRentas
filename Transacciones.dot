@@ -1,18 +1,17 @@
 digraph a{
 rankdir = LR
 node[shape = rectangle]
-X01074C38[label = "Id_Transaccion: DC7UgLxTLJwjnAX
-Nombre Activo: asfd
-Usuario: B
-Fecha: 18/06//2020 -- 03:35:22
+X00729D18[label = "Id_Transaccion: iCo2mW100Lyqs1b
+Nombre Activo: Mi_casa
+Usuario: E
+Fecha: 18/06//2020 -- 16:55:35
 Rentado"]
-X01074B68[label = "Id_Transaccion: xfPda5rqKQZTEmU
-Nombre Activo: asdf
-Usuario: B
-Fecha: 18/06//2020 -- 03:35:12
-Rentado"]
-X01074C38-> X01074B68
-X01074C38-> X01074B68
-X01074B68-> X01074C38
-X01074B68-> X01074C38
+X00729DE8[label = "Id_Transaccion: xfPda5rqKQZTEmU
+Nombre Activo: casdcasd
+Usuario: E
+Fecha: 18/06//2020 -- 16:55:55Renta cancelada"]
+X00729D18-> X00729DE8
+X00729D18-> X00729DE8
+X00729DE8-> X00729D18
+X00729DE8-> X00729D18
 }

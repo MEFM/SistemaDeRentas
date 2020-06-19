@@ -544,7 +544,7 @@ void rentarActivo(ActivosRenta* arbolUsuario, NodoTablero* infoUsuario) {
 
 void activosRentados(ActivosRenta* arbolUsuario, NodoTablero* usuario) {
 	cout << "----------------------------Activos Rentados----------------------------" << endl;
-	arbolUsuario->reservados();
+	transacciones->recorrer(usuario);
 	cout << endl << "1. Devolver activo" << endl;
 	cout << "2. Regresar a menu usuario" << endl;
 	string opcion;
@@ -554,13 +554,10 @@ void activosRentados(ActivosRenta* arbolUsuario, NodoTablero* usuario) {
 		opcion = "";
 		cout << "Ingrese el id del activo a devolver" << endl;
 		cin >> opcion;
-		NodoActivo* auxiliar = tablero->reservarActivo(opcion);
-		if (auxiliar != 0) {
-			auxiliar->disponibilidad = true;
+		
+		if (tablero->reservarActivo(opcion) != 0) {
+			tablero->reservarActivo(opcion)->disponibilidad = true;
 			transacciones->devolucion(usuario, opcion);
-		}
-		else {
-			cout << "No existe o no esta reservado a nombre tuyo." << endl;
 		}
 	}
 	else {
@@ -581,21 +578,22 @@ void misActivosRentados(ActivosRenta* arbolUsuario) {
 int main()
 {
 
-	logIn();
+	//logIn();
 
 
-	//ActivosRenta* arbol = new ActivosRenta();
+	ActivosRenta* arbol = new ActivosRenta();
 
-	//arbol->insertar("Hol", "1q0", "", true);
-	//arbol->insertar("Mi", "5e", "", false);
-	//arbol->insertar("Op", "1b3", "", true);
-	//arbol->insertar("Lp", "1a", "", false);
-	//arbol->insertar("Qw", "6b", "", false);
-	//arbol->insertar("Gf", "1c2", "", true);
-	//arbol->insertar("bf", "11d", "", false);
-	//arbol->insertar("Mk", "17e", "", true);
-	//arbol->insertar("Ml", "15f", "", true);
+	arbol->insertar("Hol", "1q0", "", true);
+	arbol->insertar("Mi", "5e", "", false);
+	arbol->insertar("Op", "1b3", "", true);
+	arbol->insertar("Lp", "1a", "", false);
+	arbol->insertar("Qw", "6b", "", false);
+	arbol->insertar("Gf", "1c2", "", true);
+	arbol->insertar("bf", "11d", "", false);
+	arbol->insertar("Mk", "17e", "", true);
+	arbol->insertar("Ml", "15f", "", true);
 
+	arbol->graficar();
 
 	//ActivosRenta* arbol2 = new ActivosRenta();
 

@@ -6,29 +6,9 @@ compound = true
                                   Titulo0                                  [label="M"]
                                   }
                                   subgraph cluster1                                  {
-                                  label ="Activos"                                                                    								DiCo2mW100Lyqs1b[label = "iCo2mW100Lyqs1b Nombre Activo: ds"]
-								DxfPda5rqKQZTEmU[label = "xfPda5rqKQZTEmU Nombre Activo: asdf"]
-								DxfPda5rqKQZTEmU[label = "iCo2mW100Lyqs1b Nombre Activo: ds"]
-								DiCo2mW100Lyqs1b-> DxfPda5rqKQZTEmU
-								DxfPda5rqKQZTEmU[label = "xfPda5rqKQZTEmU Nombre Activo: asdf"]
+                                  label ="Activos"                                                                    								DG0UvkOEdRFj7i5Q[label = "G0UvkOEdRFj7i5Q Nombre Activo: ascdac"]
                                   }
 
-                                  Titulo0                                  -> DiCo2mW100Lyqs1b[ltail=cluster0 lhead=cluster1]
-                                  ;
-                                  subgraph cluster2                                  {
-                                  label = "Usuario";
-                                  Titulo2                                  [label="N"]
-                                  }
-                                  subgraph cluster3                                  {
-                                  label ="Activos"                                                                    								Dafwjk0BhaaxGJLL[label = "afwjk0BhaaxGJLL Nombre Activo: asdf"]
-								DaIlYKDv4YUk2SFs[label = "afwjk0BhaaxGJLL Nombre Activo: asdf"]
-								Dafwjk0BhaaxGJLL-> DaIlYKDv4YUk2SFs
-								DkPBvdLWXGs3T86H[label = "afwjk0BhaaxGJLL Nombre Activo: asdf"]
-								Dafwjk0BhaaxGJLL-> DkPBvdLWXGs3T86H
-								DaIlYKDv4YUk2SFs[label = "aIlYKDv4YUk2SFs Nombre Activo: ds"]
-								DkPBvdLWXGs3T86H[label = "kPBvdLWXGs3T86H Nombre Activo: asf"]
-                                  }
-
-                                  Titulo2                                  -> Dafwjk0BhaaxGJLL[ltail=cluster2 lhead=cluster3]
+                                  Titulo0                                  -> DG0UvkOEdRFj7i5Q[ltail=cluster0 lhead=cluster1]
                                   ;
 }

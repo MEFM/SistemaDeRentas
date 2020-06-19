@@ -123,12 +123,15 @@ bool Historial::verificarExistencia(int id) {
 	}
 }
 
-void Historial::recorrer() {
+void Historial::recorrer(NodoTablero* usuario) {
 	if (this->primero != 0) {
 		NodoHistorial* auxiliar = this->primero;
 
 		do {
-			cout << auxiliar->nombreActivo << endl;
+			if (auxiliar->usuario == usuario) {
+				cout <<"Id: Activo: "<<auxiliar->codigoActivo<<" | Nombre Activo: "<<auxiliar->nombreActivo << endl;
+			}
+
 			auxiliar = auxiliar->siguiente;
 		} while (auxiliar != primero);
 	}
