@@ -303,7 +303,7 @@ void ActivosRenta::rotacionSimpleIzquierda(NodoActivo* nodo)
 	Q->factorEquilibrio = 0;
 }
 
-void ActivosRenta::eliminar(const int dat)
+void ActivosRenta::eliminar(string dat)
 {
 	NodoActivo* padre = 0;
 	NodoActivo* nodo;
@@ -311,16 +311,19 @@ void ActivosRenta::eliminar(const int dat)
 
 	actual = raiz;
 	while (!(actual == 0)) {
-		if (dat == actual->dato) {
+		if (dat == actual->codAlfanum) {
 			if (EsHoja(actual)) {
 				if (padre) {
 					if (padre->derecho == actual) {
 						padre->derecho = 0;
 					}
+					//Estas son verificaciones para eliminar
 					else if (padre->izquierdo == actual) {
 						padre->izquierdo = 0;
 					}
 				}
+				//Si elimina el actaul a irse de una vez
+
 				delete actual;
 				actual = 0;
 
@@ -330,8 +333,12 @@ void ActivosRenta::eliminar(const int dat)
 					padre = actual->padre;
 				}
 				if (padre)
-					if (padre->derecho == actual) equilibrar(padre, DERECHO, false);
-					else                         equilibrar(padre, IZQUIERDO, false);
+					if (padre->derecho == actual) {
+						equilibrar(padre, DERECHO, false);
+					}
+					else {
+						equilibrar(padre, IZQUIERDO, false);
+					}
 				return;
 			}
 			else {
@@ -361,10 +368,10 @@ void ActivosRenta::eliminar(const int dat)
 		}
 		else {
 			padre = actual;
-			if (dat > actual->dato) {
+			if (dat > actual->codAlfanum) {
 				actual = actual->derecho;
 			}
-			else if (dat < actual->dato) {
+			else if (dat < actual->codAlfanum) {
 				actual = actual->izquierdo;
 			}
 		}
@@ -419,7 +426,7 @@ bool ActivosRenta::buscar(string xodigo) {
 
 void ActivosRenta::modificar(int aReemplazar, string nombreActivo, const int dat, string descripcion, bool disponibilidad) {
 	if (this->raiz != 0) {
-		this->eliminar(aReemplazar);
+//		this->eliminar(aReemplazar);
 		this->insertar(nombreActivo, dat, descripcion, disponibilidad);
 	}
 	else {

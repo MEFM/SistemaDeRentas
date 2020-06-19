@@ -139,7 +139,7 @@ public:
 
 	void insertar(string nombreActivo, string dat, string descripcion, bool disponibilidad);
 
-	void eliminar(const int dat);
+	void eliminar(string dat);
 	bool buscar(const int dat);
 
 	void recor();

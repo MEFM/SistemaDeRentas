@@ -1,3 +1,7 @@
 ﻿  ActivoRenta.cpp
-C:\Users\mynor\source\repos\PPVPS2020\PPVPS2020\ActivoRenta.cpp(456): warning C4715: 'ActivosRenta::buscarActivo': no todas las rutas de acceso de control devuelven un valor
+  PPVPS2020.cpp
+  Tablero.cpp
+C:\Users\mynor\source\repos\PPVPS2020\PPVPS2020\Tablero.cpp(804,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  Generando código...
+C:\Users\mynor\source\repos\PPVPS2020\PPVPS2020\ActivoRenta.cpp(463): warning C4715: 'ActivosRenta::buscarActivo': no todas las rutas de acceso de control devuelven un valor
   PPVPS2020.vcxproj -> C:\Users\mynor\source\repos\PPVPS2020\Debug\PPVPS2020.exe

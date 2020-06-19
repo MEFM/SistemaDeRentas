@@ -445,7 +445,7 @@ void eliminarActivo(ActivosRenta* arbolUsuario) {
 	cout << "-----------------Eliminar activos de cartera-----------------" << endl;
 	arbolUsuario->libres();
 	cout << endl << endl;
-	int id;
+	string id;
 	cout << "Ingrese ID a eliminar" << endl;
 	cin >> id;
 	if (arbolUsuario->buscar(id) == true) {
@@ -578,22 +578,22 @@ void misActivosRentados(ActivosRenta* arbolUsuario) {
 int main()
 {
 
-	//logIn();
+	logIn();
 
 
-	ActivosRenta* arbol = new ActivosRenta();
+	//ActivosRenta* arbol = new ActivosRenta();
 
-	arbol->insertar("Hol", "1q0", "", true);
-	arbol->insertar("Mi", "5e", "", false);
-	arbol->insertar("Op", "1b3", "", true);
-	arbol->insertar("Lp", "1a", "", false);
-	arbol->insertar("Qw", "6b", "", false);
-	arbol->insertar("Gf", "1c2", "", true);
-	arbol->insertar("bf", "11d", "", false);
-	arbol->insertar("Mk", "17e", "", true);
-	arbol->insertar("Ml", "15f", "", true);
+	//arbol->insertar("Hol", "1q0", "", true);
+	//arbol->insertar("Mi", "5e", "", false);
+	//arbol->insertar("Op", "1b3", "", true);
+	//arbol->insertar("Lp", "1a", "", false);
+	//arbol->insertar("Qw", "6b", "", false);
+	//arbol->insertar("Gf", "1c2", "", true);
+	//arbol->insertar("bf", "11d", "", false);
+	//arbol->insertar("Mk", "17e", "", true);
+	//arbol->insertar("Ml", "15f", "", true);
 
-	arbol->graficar();
+	//arbol->graficar();
 
 	//ActivosRenta* arbol2 = new ActivosRenta();
 
